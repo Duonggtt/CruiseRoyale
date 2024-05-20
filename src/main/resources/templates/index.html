@@ -1,13 +1,927 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WS8T4QNF');</script>
+    <!-- End Google Tag Manager -->
+
+
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+          integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd"
+          crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.17.0/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!--    <link rel="icon" type="image/x-icon" href="img/logos5.png">-->
+    <link rel="icon" type="image/x-icon" href="img/imgroot/SVG/LOGO.svg">
+
+    <meta property="og:image" content="img/imgroot/SVG/LOGO.svg"/>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/scrips/script.js"></script>
+
+
+    <title>Travel Fuu</title>
+
+    <!--<link rel="stylesheet" href="style/style2.css">-->
+
 </head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q62JJJS33X"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Q62JJJS33X');
+</script>
 <body>
-<div>
-    <h1>Spring Boot Thymeleaf Example</h1>
-    <p>Spring Boot Thymeleaf Example</p>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WS8T4QNF"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light rounded sticky-top" aria-label="Eleventh navbar example">
+    <div class="container container_1">
+
+
+        <!--        <a href="index.html"> <img class="navbar-brand" src="img/logoTravelFuu/TravelFuu1.png" width="180"/></a>-->
+        <!--        <a href="index.html"> <img class="navbar-brand" src="img/logoTravelFuu/TravelFuu2.png" width="180"/></a>-->
+        <a href="index.html"> <img class="navbar-brand" src="img/logoTravelFuu/TravelFuuS.svg" width="180"/></a>
+        <!--        <a href="index.html"> <img class="navbar-brand" src="img/logoTravelFuu/TravelFuu4.png" width="180"/></a>-->
+        <!-- Thay đổi icon của button toggle ở đây -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <!-- Sử dụng biểu tượng tùy chỉnh từ Bootstrap Icons -->
+            <i class="bi bi-grid"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample09">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="tim_du_thuyen.html">Tìm du thuyền</a></li>
+                <li class="nav-item"><a class="nav-link" href="tim_ve_may_bay.html">Tìm vé máy bay</a></li>
+                <li class="nav-item"><a class="nav-link" href="Doanh_Nghiep.html">Doanh nghiệp</a></li>
+                <li class="nav-item"><a class="nav-link" href="Blog.html">Blog</a></li>
+            </ul>
+
+
+        </div>
+        <!-- Liên hệ Travel Fuu button visible on desktop -->
+        <div class="ms-auto d-none d-lg-block">
+            <a href="Lien_He.html">
+                <button class="btn btn-outline-primary my-2 my-sm-0 btn-contact ">
+                    <h7>Liên hệ Travel Fuu</h7>
+                </button>
+            </a>
+        </div>
+
+        <!-- Liên hệ Travel Fuu button visible on mobile -->
+        <a href="Lien_He.html">
+            <button class="btn btn-outline-primary my-2 my-sm-0 btn-contact d-lg-none">
+                <h7>Liên hệ Travel Fuu</h7>
+            </button>
+        </a>
+
+    </div>
+</nav>
+
+<div class="video-box" style="margin: 0 12% 0 12% ;height: auto !important;max-height: 700px">
+    <!--    <video src="media/videovivu.mp4" autoplay muted loop></video>-->
+    <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+
+            <div class="carousel-item active">
+                <img src="img/bn-5.jpg" class="d-block w-100" alt="Image 2">
+            </div>
+            <div class="carousel-item ">
+                <img src="img/bn-4.jpg" class="d-block w-100" alt="Image 1">
+            </div>
+            <div class="carousel-item">
+                <img src="img/bn-2.jpg" class="d-block w-100" alt="Image 3">
+            </div>
+            <div class="carousel-item ">
+                <img src="img/bn-8.jpg" class="d-block w-100" alt="Image 8">
+            </div>
+            <div class="carousel-item">
+                <img src="img/bn-6.jpg" class="d-block w-100" alt="Image 4">
+            </div>
+            <div class="carousel-item">
+                <img src="img/bn-7.jpg" class="d-block w-100" alt="Image 5">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 </div>
+<div class="container">
+
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-12 square-box"
+             style="margin-top: -0%;
+             height: auto;
+             width: 60%;
+             z-index: 2;
+             position: absolute;
+             padding-bottom: 0 !important;
+             padding-top: 2em !important;
+             max-width: 1114px;
+             ">
+            <div class="col-md-12" style="width:auto; padding-top: 1em ;">
+                <h2 class="text-center">Bạn lựa chọn du thuyền Hạ Long nào? </h2>
+                <p class="text-center">Hơn 100 tour du thuyền hạng sang giá tốt đang chờ bạn</p>
+            </div>
+
+            <div class="row align-items-center" style="margin: -1em 0 2% 0">
+                <div class="col-md-4">
+                    <label class="input input-timkiem">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M11 6C13.7614 6 16 8.23858 16 11M16.6588 16.6549L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                                  stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            </path>
+                        </svg>
+                        <input class="p-md" placeholder="Nhập tên du thuyền" value=""
+                               style="border: none !important; box-shadow: none !important; ">
+                    </label>
+                </div>
+
+                <div class="custom-select col-md-3" style="width: 200px; position: relative;">
+                    <select>
+                        <option value="TatCaDiaDiem">Tất cả địa điểm</option>
+                        <option value="TatCaDiaDiem">Tất cả địa điểm</option>
+                        <option value="VinhHaLong">Vịnh Hạ Long</option>
+                        <option value="VinhLanHa">Vịnh Lan Hạ</option>
+                        <option value="DaoCatBa">Đảo Cát Bà</option>
+                    </select>
+                    <i class="bi bi-chevron-down" id="dropdown-icon1"
+                       style="position: absolute; right: 10%; top: 50%; transform: translateY(-50%);"></i>
+                </div>
+
+                <div class="custom-select col-md-3" style="width: 200px; position: relative;">
+                    <select>
+                        <option value="TatCaMucGia">Tất cả mức giá</option>
+                        <option value="TatCaMucGia">Tất cả mức giá</option>
+                        <option value="Tu1Den3Trieu">Từ 1 đến 3 triệu</option>
+                        <option value="Tu3Den6Trieu">Từ 3 đến 6 triệu</option>
+                        <option value="Tren6Trieu">Trên 6 triệu</option>
+                    </select>
+                    <i class="bi bi-chevron-down" id="dropdown-icon2"
+                       style="position: absolute; right: 10%; top: 50%; transform: translateY(-50%);"></i>
+                </div>
+
+                <div class="col-md">
+                    <a href="tim_du_thuyen.html">
+                        <button class="btn btn-primary" style="height:60px; width: 100%"> Tìm kiếm</button>
+                    </a>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <br> <br> <br> <br><br> <br>
+
+    <div class="row">
+
+        <!-- Content -->
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <b style="font-size: 36px; font-family: Archivo, sans-serif ,bold; ">Du thuyền mới <br>và phổ biến nhất
+                </b> <br>
+                <img src="img/heading-border.png" height="8" width="80" alt=""/></div>
+            <div class="col-md-5">
+                <p style=" font-size: 18px; font-family: Archivo, sans-serif ; ">Tận hưởng sự xa hoa và đẳng cấp tối đa
+                    trên du thuyền mới nhất và phổ biến nhất. Khám phá một hành
+                    trình tuyệt vời đưa bạn vào thế giới của sự sang trọng, tiện nghi và trải nghiệm không thể quên.</p>
+            </div>
+        </div>
+
+        <div class="row row-duthuyen">
+            <!-- box1-->
+            <div class="col-md-4">
+                <a href="thong-tin-du-thuyen.html">
+                    <div class="square-box">
+                        <div class="position-relative">
+                            <img src="img/box1.webp" alt="Ảnh chiếm 50% phần trên của box" class="w-100 ">
+                            <div class="position-absolute top-0 start-0">
+                                <span class="bi bi-star-fill text-warning"></span>
+                                <label class="xs">5 (0) đánh giá</label>
+                            </div>
+                        </div>
+
+                        <div class="ProductCard_cardContent__dhwKR">
+                            <div class="col-md-5">
+                                <div class="location-info-s">
+                                    <i class="bi bi-geo"></i>
+                                    <label>Vịnh Hạ Long</label>
+                                </div>
+                            </div>
+
+                            <!-- H4 Du thuyền Heritage Bình Chuẩn Cát Bà -->
+                            <h5 class=" thongtin"><br>Du thuyền Heritage Cát Bà</h5>
+
+                            <!-- Div chứa icon tàu du lịch và chữ "Hạ thuỷ 2019 - Tàu vỏ Kim loại - 20 phòng" -->
+                            <div class="ship-info">
+                                <!--                            <img src="img/cruise.png"/>-->
+                                <h6 class="thongtin">Hạ thuỷ 2019 - Tàu vỏ Kim loại - 20 phòng</h6>
+                            </div>
+
+                        </div>
+
+                        <div class=".ProductCard_footer__nZNq6">
+                            <!-- Div chứa "3.500.000đ" và nút đặt ngay -->
+                            <div class="price-and-button">
+                                <b class="price">3.500.000đ</b>
+                                <button class="btn btn-primary">Đặt Ngay</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+
+            </div>
+            <!-- box2-->
+            <div class="col-md-4">
+                <a href="thong-tin-du-thuyen.html">
+                    <div class="square-box">
+                        <div class="position-relative">
+                            <img src="img/box2.jpg"
+                                 alt="Ảnh chiếm 50% phần trên của box" class="w-100  ">
+                            <div class="position-absolute top-0 start-0 ">
+                                <span class="bi bi-star-fill text-warning"></span>
+                                <label class="xs">5 (0) đánh giá</label>
+                            </div>
+                        </div>
+                        <div class="ProductCard_cardContent__dhwKR">
+                            <div class="col-md-5">
+                                <div class="location-info-s">
+                                    <i class="bi bi-geo"></i>
+                                    <label>Vịnh Hạ Long</label>
+                                </div>
+                            </div>
+
+                            <!-- H4 Du thuyền Heritage Bình Chuẩn Cát Bà -->
+                            <h5 class="thongtin"><br>Du thuyền Elite of the Seas</h5>
+
+                            <!-- Div chứa icon tàu du lịch và chữ "Hạ thuỷ 2019 - Tàu vỏ Kim loại - 20 phòng" -->
+                            <div class="ship-info">
+                                <!--                            <img src="img/cruise.png"/>-->
+                                <h6 class="thongtin">Hạ thuỷ 2022 - Tàu vỏ Kim loại - 35 phòng</h6>
+                            </div>
+
+                        </div>
+
+                        <div class=".ProductCard_footer__nZNq6">
+                            <!-- Div chứa "3.500.000đ" và nút đặt ngay -->
+                            <div class="price-and-button">
+                                <b class="price">5.200.000đ</b>
+                                <button class="btn btn-primary">Đặt Ngay</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+
+            </div>
+            <!-- box3-->
+            <div class="col-md-4">
+                <a href="thong-tin-du-thuyen.html">
+                    <div class="square-box">
+                        <div class="position-relative">
+                            <img src="img/box3.jpg"
+                                 alt="Ảnh chiếm 50% phần trên của box" class="w-100  ">
+                            <div class="position-absolute top-0 start-0 ">
+                                <span class="bi bi-star-fill text-warning"></span>
+                                <label class="xs">5 (0) đánh giá</label>
+                            </div>
+                        </div>
+                        <div class="ProductCard_cardContent__dhwKR">
+                            <div class="col-md-5">
+                                <div class="location-info-s">
+                                    <i class="bi bi-geo"></i>
+                                    <label>Vịnh Hạ Long</label>
+                                </div>
+                            </div>
+
+                            <h5 class="thongtin"><br>Du Thuyền Stellar of the Seas</h5>
+
+                            <div class="ship-info">
+                                <!--  <img src="img/cruise.png"/>-->
+                                <h6 class="thongtin">Hạ thuỷ 2018 - Tàu vỏ Kim loại - 22 phòng</h6>
+                            </div>
+
+                        </div>
+
+                        <div class=".ProductCard_footer__nZNq6">
+                            <!-- Div chứa "3.500.000đ" và nút đặt ngay -->
+                            <div class="price-and-button">
+                                <b class="price">4.800.000đ</b>
+                                <button class="btn btn-primary">Đặt Ngay</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+        <div class="row row-duthuyen">
+
+            <!-- box4-->
+            <div class="col-md-4">
+                <a href="thong-tin-du-thuyen.html">
+                    <div class="square-box">
+                        <div class="position-relative">
+                            <img src="img/box4.webp"
+                                 alt="Ảnh chiếm 50% phần trên của box" class="w-100  ">
+                            <div class="position-absolute top-0 start-0">
+                                <span class="bi bi-star-fill text-warning"></span>
+                                <label class="xs">5 (0) đánh giá</label>
+                            </div>
+                        </div>
+                        <div class="ProductCard_cardContent__dhwKR">
+                            <div class="col-md-5">
+                                <div class="location-info-s">
+                                    <i class="bi bi-geo"></i>
+                                    <label>Vịnh Hạ Long</label>
+                                </div>
+                            </div>
+
+                            <!-- H4 Du thuyền Heritage Bình Chuẩn Cát Bà -->
+                            <h5 class="thongtin"><br>Du thuyền Ambassador Hạ Long</h5>
+
+                            <!-- Div chứa icon tàu du lịch và chữ "Hạ thuỷ 2019 - Tàu vỏ Kim loại - 20 phòng" -->
+                            <div class="ship-info">
+                                <!--                            <img src="img/cruise.png"/>-->
+                                <h6 class="thongtin">Hạ thuỷ 2018 - Tàu vỏ Kim loại - 46 phòng</h6>
+                            </div>
+
+                        </div>
+
+                        <div class=".ProductCard_footer__nZNq6">
+                            <!-- Div chứa "3.500.000đ" và nút đặt ngay -->
+                            <div class="price-and-button">
+                                <b class="price">4.800.000đ</b>
+                                <button class="btn btn-primary">Đặt Ngay</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+
+            </div>
+            <!-- box 5-->
+            <div class="col-md-4">
+                <a href="thong-tin-du-thuyen.html">
+                    <div class="square-box">
+                        <div class="position-relative">
+                            <img src="img/box5.webp"
+                                 alt="Ảnh chiếm 50% phần trên của box" class="w-100  ">
+                            <div class="position-absolute top-0 start-0 ">
+                                <span class="bi bi-star-fill text-warning"></span>
+                                <label class="xs">5 (0) đánh giá</label>
+                            </div>
+                        </div>
+                        <div class="ProductCard_cardContent__dhwKR">
+                            <div class="col-md-5">
+                                <div class="location-info-s">
+                                    <i class="bi bi-geo"></i>
+                                    <label>Vịnh Hạ Long</label>
+                                </div>
+                            </div>
+
+                            <!-- H4 Du thuyền Heritage Bình Chuẩn Cát Bà -->
+                            <h5 class="thongtin"><br>Du thuyền Scarlet Pearl</h5>
+
+                            <!-- Div chứa icon tàu du lịch và chữ "Hạ thuỷ 2019 - Tàu vỏ Kim loại - 20 phòng" -->
+                            <div class="ship-info">
+                                <!--  <img src="img/cruise.png"/>-->
+                                <h6 class="thongtin">Hạ thuỷ 2019 - Tàu vỏ Kim loại - 22 phòng</h6>
+                            </div>
+
+                        </div>
+
+                        <div class=".ProductCard_footer__nZNq6">
+                            <!-- Div chứa "3.500.000đ" và nút đặt ngay -->
+                            <div class="price-and-button">
+                                <b class="price">3.300.000đ</b>
+                                <button class="btn btn-primary">Đặt Ngay</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+
+            </div>
+            <!-- box6-->
+            <div class="col-md-4">
+                <a href="thong-tin-du-thuyen.html">
+                    <div class="square-box">
+                        <div class="position-relative">
+                            <img src="img/box6.webp"
+                                 alt="Ảnh chiếm 50% phần trên của box" class="w-100  ">
+                            <div class="position-absolute top-0 start-0 ">
+                                <span class="bi bi-star-fill text-warning"></span>
+                                <label class="xs">5 (0) đánh giá</label>
+                            </div>
+                        </div>
+                        <div class="ProductCard_cardContent__dhwKR">
+                            <div class="col-md-5">
+                                <div class="location-info-s">
+                                    <i class="bi bi-geo"></i>
+                                    <label>Vịnh Hạ Long</label>
+                                </div>
+                            </div>
+
+                            <!-- H4 Du thuyền Heritage Bình Chuẩn Cát Bà -->
+                            <h5 class="thongtin"><br>Du thuyền Essence Grand</h5>
+
+                            <!-- Div chứa icon tàu du lịch và chữ "Hạ thuỷ 2019 - Tàu vỏ Kim loại - 20 phòng" -->
+                            <div class="ship-info">
+                                <!--                            <img src="img/cruise.png"/>-->
+                                <h6 class="thongtin">Hạ thuỷ 2023 - Tàu vỏ Kim loại - 56 phòng</h6>
+                            </div>
+
+                        </div>
+
+                        <div class=".ProductCard_footer__nZNq6">
+                            <!-- Div chứa "3.500.000đ" và nút đặt ngay -->
+                            <div class="price-and-button">
+                                <b class="price">4.850.000đ</b>
+                                <button class="btn btn-primary">Đặt Ngay</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="row row_viewAll justify-content-center">
+        <div class="col-md-3">
+            <a href="tim_du_thuyen.html">
+                <button class="btn btn-viewAll">Xem tất cả Du thuyền <span>&rarr;</span></button>
+            </a>
+
+        </div>
+    </div>
+</div>
+
+<div class="row row-feedback">
+    <div class="container">
+        <div class="col-md-8 mx-auto">
+            <div class="row row-one">
+                <div class="col-md-6">
+                    <b style="font-size: 36px;color: #101828">Đánh giá từ những <br> người đã trải
+                        nghiệm</b><br>
+                    <img src="img/heading-border.png" height="8" width="80" alt=""/>
+                </div>
+                <div class="col-md-6"
+                     style="font-size: 18px; color: #475467 ;font-family: 'Archivo', sans-serif , bold">
+                    Khách hàng chia sẻ về những kỷ niệm tuyệt vời
+                    trên chuyến <br> du lịch với chúng tôi.
+                </div>
+            </div>
+
+            <div class="row row-two">
+                <div class="col-md-1">
+                    <img src="img/quote.svg" class="img-fluids" alt="Quote Image"/>
+                </div>
+                <div class="col-md-8">
+                    <b style="font-size: 20px">Du thuyền Stellar of the Seas</b> <br><br>
+                    <p style="font-size: 16px">
+                        Anh chọn ngày đi tàu trùng với sinh nhật vợ anh. Muốn là món quà tặng vợ.<br>
+                        Với lại, vợ anh thích chụp ảnh nữa.
+                        Anh thấy bạn bè bảo đặt tàu này hơi khó vì rất hot, hay kín phòng.
+                        May quá bên em lại có phòng tàu này.
+                        Cảm ơn dịch vụ của bên em nhé! <br>
+                        Tàu đẹp, sang trọng, rất ổn! Tối sinh nhật vợ anh thì tàu có tặng 1 bánh sinh nhật nhỏ.
+                        Nói chung, cả gia đình anh rất hài lòng về chuyến đi cũng như dịch vụ tư vấn của bên em.
+                        Tàu đẹp, sang trọng, rất ổn! Tối sinh nhật vợ anh thì tàu có tặng 1 bánh sinh nhật nhỏ.
+                        Nói chung, cả gia đình anh rất hài lòng về chuyến đi cũng như dịch vụ tư vấn của bên em.
+                    </p>
+                    <br>
+                    <b>ANH KHÁNH -</b>
+                </div>
+            </div>
+            <div class="row row-3">
+                <div class="col">
+                    <button type="button" class="btn btn-kh btn-kh-1">Chị Thu Hà</button>
+                    <button type="button" class="btn btn-kh btn-kh-2">Anh Khánh</button>
+                    <button type="button" class="btn btn-kh btn-kh-3">Chị Linh - Anh Dũng</button>
+                    <button type="button" class="btn btn-kh btn-kh-4">Bạn Minh Hoàng</button>
+                    <button type="button" class="btn btn-kh btn-kh-5">Cô Thanh Hằng và bạn</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="row row-toLocation">
+
+            <div class="col-md-8 row-toLocation row-content mx-auto text-center">
+
+                <h4 style="font-family: 'Archivo', sans-serif , bold ; font-size: 36px;color: #101828;font-weight: 700;">
+                    Các điểm đến của Travel Fuu
+                </h4>
+                <label style="font-family: 'Archivo', sans-serif , bold ; font-size: 18px ;color: #475467">
+                    Khám phá vẻ đẹp tuyệt vời của Du
+                    thuyền Hạ Long: Hành trình đến thiên đường thiên nhiên</label><br>
+                <img src="img/heading-border.png" height="8" width="80" alt=""/>
+            </div>
+
+            <div class="col-md-4">
+                <a href="tim_du_thuyen.html">
+                    <div class="row-toLocation square-box text-center">
+                        <div class="position-relative">
+                            <img src="img/boxs1.jpg" alt="Ảnh chiếm 50% phần trên của box" class="w-100">
+                        </div>
+                        <b class="d-block mt-2 mb-2"
+                           style="font-family: 'Archivo', sans-serif , bold;font-size: 24px;padding-top: 0.2em;padding-bottom: 0.5em">
+                            Vịnh Hạ Long
+                        </b>
+                        <button class="btn btn_viewNgay">Xem Ngay</button>
+                    </div>
+                </a>
+
+            </div>
+            <div class="col-md-4">
+                <a href="tim_du_thuyen.html">
+                    <div class="row-toLocation square-box text-center">
+                        <div class="position-relative">
+                            <img src="img/boxs2.jpg" alt="Ảnh chiếm 50% phần trên của box" class="w-100">
+                        </div>
+                        <b class="d-block mt-2 mb-2"
+                           style="font-family: 'Archivo', sans-serif , bold;font-size: 24px;padding-top: 0.2em;padding-bottom: 0.5em">
+                            Vịnh Lan Hạ</b>
+                        <button class="btn btn_viewNgay">Xem Ngay</button>
+                    </div>
+                </a>
+
+            </div>
+            <div class="col-md-4">
+                <a href="tim_du_thuyen.html">
+                    <div class="row-toLocation square-box text-center">
+                        <div class="position-relative">
+                            <img src="img/boxs3.jpg" alt="Ảnh chiếm 50% phần trên của box" class="w-100">
+                        </div>
+                        <b class="d-block mt-2 mb-2"
+                           style="font-family: 'Archivo', sans-serif , bold;font-size: 24px;padding-top: 0.2em;padding-bottom: 0.5em">
+                            Đảo Cát Bà
+                        </b>
+                        <button class="btn btn_viewNgay">Xem Ngay</button>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="section-bg">
+    <div class="col-md-8 mx-auto">
+        <div class="row row-one">
+            <div class="col-md-6">
+                <b style="font-size: 36px;  color: #101828">Đối tác Cùng các Hãng Du thuyền Lớn</b><br>
+                <img src="img/heading-border.png" height="8" width="80" alt=""/>
+            </div>
+            <div class="col-md-4 offset-md-2"
+                 style="font-size: 16px; color: #475467 ;font-family: 'Archivo', sans-serif , bold">
+                Đối tác hàng đầu với các hãng du thuyền danh tiếng: Ưu đãi độc quyền dành riêng cho bạn
+            </div>
+        </div>
+
+        <div class="row row-two">
+            <div class="col-md-2">
+                <img src="img/partner1.png" class="img-fluid" alt="Image 1">
+            </div>
+            <div class="col-md-2">
+                <img src="img/partner2.png" class="img-fluid" alt="Image 2">
+            </div>
+            <div class="col-md-2">
+                <img src="img/partner3.png" class="img-fluid" alt="Image 3">
+            </div>
+            <div class="col-md-2">
+                <img src="img/partner4.png" class="img-fluid" alt="Image 4">
+            </div>
+            <div class="col-md-2">
+                <img src="img/partner5.png" class="img-fluid" alt="Image 5">
+            </div>
+            <div class="col-md-2">
+                <img src="img/partner6.png" class="img-fluid" alt="Image 6">
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="BlogSection_section__D6dfs">
+
+    <div class="col-md-8 mx-auto">
+        <div class="row row-one">
+            <div class="col-md-6">
+                <b style="font-size: 36px;  color: #101828">Hạ Long: Khám phá Sự đặc sắc<br>
+                    và Cập nhật tin tức mới nhất</b><br>
+                <img src="img/heading-border.png" height="8" width="80" alt=""/>
+            </div>
+            <div class="col-md-4 offset-md-2"
+                 style="font-size: 16px; color: #475467 ;font-family: 'Archivo', sans-serif , bold">
+                Hạ Long: Bí mật và Cuộc sống trong Vịnh - Khám phá và Cập nhật những tin tức hấp dẫn từ điểm đến
+                tuyệt
+                vời này.
+            </div>
+        </div>
+
+        <div class="row row-two">
+
+            <div class="col-md-4">
+                <a href="Blog.html">
+                    <div class="row-toLocation square-box text-center">
+                        <div class="position-relative">
+                            <img src="img/boxz1.webp" alt="Ảnh chiếm 50% phần trên của box" class="w-100">
+                        </div>
+
+                        <b class="d-block mt-2 mb-2"
+                           style="font-family: 'Archivo', sans-serif, bold; font-size: 16px; color: #475467">
+                            Khám phá 3 ngôi chùa nổi tiếng ở Quảng Ninh
+                        </b>
+                        <label class="noidung" style="font-size: 12px; text-align: left;">
+                            Không chỉ được biết đến là một địa điểm du lịch nổi tiếng bao gồm: Vịnh Hạ Long, đảo
+                            Tuần Châu,
+                            …Ngoài ra, thành phố du lịch Quảng Ninh còn thu hút du khách bởi những địa điểm du lịch
+                            tâm
+                            linh.
+                        </label>
+                        <br>
+                        <label class="float-start">08/12/2023</label>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="col-md-4">
+                <a href="Blog.html">
+                    <div class="row-toLocation square-box text-center">
+                        <div class="position-relative">
+                            <img src="img/boxz2.webp" alt="Ảnh chiếm 50% phần trên của box" class="w-100">
+                        </div>
+                        <b class="d-block mt-2 mb-2"
+                           style="font-family: 'Archivo', sans-serif, bold; font-size: 16px; color: #475467">
+                            TOP ĐẶC SẢN QUẢNG NINH NỔI TIẾNG
+                        </b>
+
+                        <label class="noidung" style="font-size: 12px; text-align: left;">
+                            Sau những trải nghiệm du lịch hấp dẫn, nhiều du khách tìm kiếm đặc sản QUẢNG NINH làm
+                            quà cho
+                            người thân, bạn bè. Có nhiều loại đặc sản Quảng Ninh mua về làm quà nổi tiếng, hấp dẫn,
+                            chắc
+                            chắn khi bạn tặng người nhận sẽ rất hài lòng.
+                        </label>
+                        <br>
+                        <label class="float-start">08/12/2023</label>
+
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="col-md-4">
+                <a href="Blog.html">
+                    <div class="row-toLocation square-box text-center">
+                        <div class="position-relative">
+                            <img src="img/boxz3.webp" alt="Ảnh chiếm 50% phần trên của box" class="w-100">
+                        </div>
+                        <b class="d-block mt-2 mb-2"
+                           style="font-family: 'Archivo', sans-serif, bold; font-size: 16px; color: #475467">
+                            Top 3 nhà hàng ngon và nổi tiếng ở Hạ Long
+                        </b>
+                        <label class="noidung" style="font-size: 12px; text-align: left;">
+                            Hạ Long không chỉ được biết đến với những điểm tham quan đẹp với nắng vàng, cát trắng,
+                            biển xanh
+                            hay những hang động nổi tiếng. Nơi đây còn mang trong mình vẻ đẹp của nền ẩm thực đa
+                            dạng và
+                            phong phú. Dưới đây là 3 nhà hàng được đánh giá “chất lượng” cho bạn tham khảo nhé!
+                        </label>
+                        <br>
+                        <label class="float-start">08/12/2023</label>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+        <div class="row row_viewAll justify-content-center">
+            <div class="col-md-3">
+                <a href="Blog.html">
+                    <button class="btn btn-viewAll">Xem tất cả <span>&rarr;</span></button>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row" id="row-footer">
+                    <div class="col-md-3" style="margin-right: 50px;">
+                        <img src="img/logoTravelFuu/TravelFuuS.svg" width="350" alt=""> <br> <br>
+                        <p class="md" style="color: #475467; ">
+                            Travel Fuu - đối tác tin cậy của các hãng du thuyền lớn,
+                            mang đến cho bạn chương trình ưu đãi độc quyền cho tour du thuyền Hạ Long. Khám phá
+                            Hạ Long vớiTravel Fuu - trải nghiệm du thuyền đẳng cấp và nhận những ưu đãi đặc biệt từ
+                            chúng tôi .
+                        </p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <ul>
+                            <li><b class="T-LINK">GIỚI THIỆU</b></li>
+                            <a href="ve-chung-toi.html">
+                                <li><b class="link">
+                                    Về chúng tôi
+                                </b></li>
+                            </a>
+                            <a href="quy-dinh-va-luu-y.html">
+                                <li><b class="link">
+                                    Quy định chung và lưu ý
+                                </b></li>
+                            </a>
+                            <a href="cau-hoi-thuong-gap.html">
+                                <li><b class="link">
+                                    Câu hỏi thường gặp
+                                </b></li>
+                            </a>
+                            <a href="Lien_He.html">
+                                <li><b class="link">
+                                    Liên hệ
+                                </b></li>
+                            </a>
+                            <li><b class="link">Hotline: +84-819 505 505</b></li>
+                            <li><b class="link">Email: info@Travel Fuu.com</b></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-3">
+                        <ul>
+                            <li><b class="T-LINK"> ĐIỂM ĐẾN</b></li>
+                            <a href="tim_du_thuyen.html">
+                                <li><b class="link">Vịnh Hạ Long</b></li>
+                            </a>
+                            <a href="tim_du_thuyen.html">
+                                <li><b class="link">Vịnh Lan Hạ</b></li>
+                            </a>
+                            <a href="tim_du_thuyen.html">
+                                <li><b class="link">Đảo Cát Bà</b></li>
+                            </a>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-2">
+                        <ul>
+                            <li><b class="T-LINK">DU THUYỀN</b></li>
+                            <a href="Blog.html">
+                                <li><b class="link">Blog</b></li>
+                            </a>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    var x, i, j, l, ll, selElmnt, a, b, c;
+    /*look for any elements with the class "custom-select":*/
+    x = document.getElementsByClassName("custom-select");
+    l = x.length;
+    for (i = 0; i < l; i++) {
+        selElmnt = x[i].getElementsByTagName("select")[0];
+        ll = selElmnt.length;
+        /*for each element, create a new DIV that will act as the selected item:*/
+        a = document.createElement("DIV");
+        a.setAttribute("class", "select-selected");
+        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+        x[i].appendChild(a);
+        /*for each element, create a new DIV that will contain the option list:*/
+        b = document.createElement("DIV");
+        b.setAttribute("class", "select-items select-hide");
+        for (j = 1; j < ll; j++) {
+            /*for each option in the original select element,
+            create a new DIV that will act as an option item:*/
+            c = document.createElement("DIV");
+            c.innerHTML = selElmnt.options[j].innerHTML;
+            c.addEventListener("click", function (e) {
+                /*when an item is clicked, update the original select box,
+                and the selected item:*/
+                var y, i, k, s, h, sl, yl;
+                s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+                sl = s.length;
+                h = this.parentNode.previousSibling;
+                for (i = 0; i < sl; i++) {
+                    if (s.options[i].innerHTML == this.innerHTML) {
+                        s.selectedIndex = i;
+                        h.innerHTML = this.innerHTML;
+                        y = this.parentNode.getElementsByClassName("same-as-selected");
+                        yl = y.length;
+                        for (k = 0; k < yl; k++) {
+                            y[k].removeAttribute("class");
+                        }
+                        this.setAttribute("class", "same-as-selected");
+                        break;
+                    }
+                }
+                h.click();
+            });
+            b.appendChild(c);
+        }
+        x[i].appendChild(b);
+        a.addEventListener("click", function (e) {
+            /*when the select box is clicked, close any other select boxes,
+            and open/close the current select box:*/
+            e.stopPropagation();
+            closeAllSelect(this);
+            this.nextSibling.classList.toggle("select-hide");
+            this.classList.toggle("select-arrow-active");
+        });
+    }
+
+    function closeAllSelect(elmnt) {
+        /*a function that will close all select boxes in the document,
+        except the current select box:*/
+        var x, y, i, xl, yl, arrNo = [];
+        x = document.getElementsByClassName("select-items");
+        y = document.getElementsByClassName("select-selected");
+        xl = x.length;
+        yl = y.length;
+        for (i = 0; i < yl; i++) {
+            if (elmnt == y[i]) {
+                arrNo.push(i)
+            } else {
+                y[i].classList.remove("select-arrow-active");
+            }
+        }
+        for (i = 0; i < xl; i++) {
+            if (arrNo.indexOf(i)) {
+                x[i].classList.add("select-hide");
+            }
+        }
+    }
+
+    /*if the user clicks anywhere outside the select box,
+    then close all select boxes:*/
+    document.addEventListener("click", closeAllSelect);
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q62JJJS33X"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Q62JJJS33X');
+</script>
 </body>
 </html>

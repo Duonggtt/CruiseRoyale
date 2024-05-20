@@ -1,0 +1,59 @@
+
+span.input-group-text.bg-light.d-block {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.input-group-append {
+    cursor: pointer;
+}
+
+.datepicker td,
+th {
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.datepicker {
+    border: none;
+    box-shadow: rgba(16, 24, 40, 0.03) 0px 8px 8px -4px, rgba(16, 24, 40, 0.08) 0px 20px 24px -4px;
+    border-radius: 8px;
+}
+
+.input-group {
+    border: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-xs);
+    border-radius: 100px;
+
+}
+
+.input-group .date {
+    padding: 10% 10% 10% 10% !important;
+}
+
+.active:active, .day:active {
+    background: var(--gray-50, #f9fafb);
+    border-radius: 10%;
+    color: var(--gray-700, #344054);
+    cursor: pointer;
+}
+
+/* Đặt màu nền cho phần tử chọn ngày trong datepicker */
+.datepicker td.active,
+.datepicker td.active:hover,
+.datepicker td.active.disabled,
+.datepicker td.active.disabled:hover {
+    background-color: #77dada !important;
+    color: var(--primary-dark, #0e4f4f) !important;
+    border-radius: 10% !important;
+
+}
+
+.datepicker table tr td.active, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover, .datepicker table tr td.active:hover {
+    background-color: #77dada !important;
+    background-image: none !important;
+    background-repeat: repeat-x;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .25)
+}
