@@ -5,7 +5,7 @@
     <meta name="author" content="Kodinger">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="icon" type="image/x-icon" href="../static/Image/imgroot/SVG/LOGO.svg">
-    <title>Login</title>
+    <title>Đăng nhập</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" href="../static/css/login.css">
@@ -22,42 +22,38 @@
                 </div>
                 <div class="card fat">
                     <div class="card-body">
-                        <h4 class="card-title">Login</h4>
+                        <h4 class="card-title" th:text="#{login.title}">Đăng nhập</h4>
                         <form method="POST" class="my-login-validation" novalidate="">
                             <div class="form-group">
-                                <label for="email">E-Mail Address</label>
+                                <label for="email" th:text="#{login.email}">Địa chỉ Email</label>
                                 <input id="email" type="email" class="form-control" name="email" value="" required autofocus>
                                 <div class="invalid-feedback">
-                                    Email is invalid
+                                    Email không hợp lệ
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="password">Password
-                                    <a href="forgot.html" class="float-right">
-                                        Forgot Password?
-                                    </a>
-                                </label>
+                                <label for="password" th:text="#{login.password}">Mật khẩu</label>
+                                <a href="forgot.html" class="float-right" th:text="#{login.forgot_password}">Quên mật khẩu?</a>
+
                                 <input id="password" type="password" class="form-control" name="password" required data-eye>
                                 <div class="invalid-feedback">
-                                    Password is required
+                                    Cần có mật khẩu
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="custom-checkbox custom-control">
                                     <input type="checkbox" name="remember" id="remember" class="custom-control-input">
-                                    <label for="remember" class="custom-control-label">Remember Me</label>
+                                    <label for="remember" class="custom-control-label">Nhớ tôi</label>
                                 </div>
                             </div>
 
                             <div class="form-group m-0">
-                                <button type="submit" class="btn btn-primary btn-block">
-                                    Login
-                                </button>
+                                <button type="submit" class="btn btn-primary btn-block" th:text="#{login.button}">Đăng nhập</button>
                             </div>
                             <div class="mt-4 text-center">
-                                Don't have an account? <a href="register.html">Create One</a>
+                                Bạn chưa có tài khoản? <a href="register.html">Tạo một cái</a>
                             </div>
                         </form>
                     </div>
