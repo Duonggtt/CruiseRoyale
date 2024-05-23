@@ -3,7 +3,7 @@ package com.example.cruiseroyalebe.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,18 +11,21 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "cabin_type")
+public class CabinType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private String username;
-    private String password;
-    private String email;
-    private String phone;
-    private String address;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles;
+    private String name;
+
+    @Column(name = "room_size")
+    private int roomSize;
+
+    @Column(name = "max_guests")
+    private int maxGuests;
+
+    private String description;
+    private BigDecimal price;
+
 }

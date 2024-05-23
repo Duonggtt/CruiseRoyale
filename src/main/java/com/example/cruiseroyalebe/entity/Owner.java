@@ -3,26 +3,20 @@ package com.example.cruiseroyalebe.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "owner")
+public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private String username;
-    private String password;
-    private String email;
-    private String phone;
-    private String address;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles;
+    private String name;
+
+    @Column(name = "owned_date")
+    private String ownedDate;
 }
