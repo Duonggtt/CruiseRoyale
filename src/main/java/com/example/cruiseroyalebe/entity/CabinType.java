@@ -1,7 +1,7 @@
 package com.example.cruiseroyalebe.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
+import javax.persistence.*;
 
 import java.math.BigDecimal;
 

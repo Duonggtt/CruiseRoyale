@@ -1,6 +1,6 @@
 package com.example.cruiseroyalebe.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static jakarta.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,7 +38,7 @@ public class Cruise {
     private String description;
     private BigDecimal price;
 
-    @ManyToMany(fetch = EAGER)
+    @ManyToMany(fetch = LAZY)
     private Collection<Rule> rules = new ArrayList<>();
 
     @Column(name = "departure_time")
@@ -45,7 +47,7 @@ public class Cruise {
     @Column(name = "arrival_time")
     private LocalTime arrivalTime;
 
-    @ManyToMany(fetch = EAGER)
+    @ManyToMany(fetch = LAZY)
     private Collection<Tag> tags = new ArrayList<>();
 
     @ManyToOne
