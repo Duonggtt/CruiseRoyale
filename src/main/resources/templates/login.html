@@ -22,10 +22,10 @@
                 </div>
                 <div class="card fat">
                     <div class="card-body">
-                        <h4 class="card-title" th:text="#{login.title}">Đăng nhập</h4>
+                        <h4 class="card-title" >Đăng nhập</h4>
                         <form method="POST" class="my-login-validation" novalidate="">
                             <div class="form-group">
-                                <label for="email" th:text="#{login.email}">Địa chỉ Email</label>
+                                <label for="email" >Địa chỉ Email</label>
                                 <input id="email" type="email" class="form-control" name="email" value="" required autofocus>
                                 <div class="invalid-feedback">
                                     Email không hợp lệ
@@ -33,8 +33,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password" th:text="#{login.password}">Mật khẩu
-                                    <a href="forgot.html" class="float-right" th:text="#{login.forgot_password}">Quên mật khẩu?</a>
+                                <label for="password">Mật khẩu
+                                    <a href="forgot.html" class="float-right">Quên mật khẩu?</a>
                                 </label>
 
                                 <input id="password" type="password" class="form-control" name="password" required data-eye>
@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="form-group m-0">
-                                <button type="submit" class="btn btn-primary btn-block" th:text="#{login.button}">Đăng nhập</button>
+                                <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
                             </div>
                             <div class="mt-4 text-center">
                                 Bạn chưa có tài khoản? <a href="register.html">Tạo một cái</a>
