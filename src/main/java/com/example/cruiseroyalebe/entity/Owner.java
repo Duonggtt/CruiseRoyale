@@ -17,6 +17,4 @@ public class Owner {
 
     private String name;
 
-    @Column(name = "owned_date")
-    private String ownedDate;
 }

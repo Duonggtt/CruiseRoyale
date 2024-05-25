@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import static javax.persistence.FetchType.EAGER;
@@ -38,14 +39,17 @@ public class Cruise {
     private String description;
     private BigDecimal price;
 
-    @ManyToMany(fetch = LAZY)
-    private Collection<Rule> rules = new ArrayList<>();
+    @Column(name = "owned_date")
+    private Date ownedDate;
 
     @Column(name = "departure_time")
     private LocalTime departureTime;
 
     @Column(name = "arrival_time")
     private LocalTime arrivalTime;
+
+    @ManyToMany(fetch = LAZY)
+    private Collection<Rule> rules = new ArrayList<>();
 
     @ManyToMany(fetch = LAZY)
     private Collection<Tag> tags = new ArrayList<>();

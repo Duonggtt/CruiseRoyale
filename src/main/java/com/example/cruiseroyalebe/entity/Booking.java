@@ -21,6 +21,9 @@ public class Booking {
     @Column(name = "booking_date")
     private Date bookingDate;
 
+    @Column(name = "order_date")
+    private Date orderDate;
+
     @Column(name = "guest_quantity")
     private int GuestQuantity;
 
@@ -28,6 +31,7 @@ public class Booking {
     private BigDecimal totalPrice;
 
     private String note;
+
     @Column(name = "booking_status")
     private Boolean bookingStatus;
 
