@@ -65,6 +65,12 @@ public class UserResource {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
+        SecurityContextHolder.clearContext();
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {
         Authentication authentication = authenticationManager.authenticate(

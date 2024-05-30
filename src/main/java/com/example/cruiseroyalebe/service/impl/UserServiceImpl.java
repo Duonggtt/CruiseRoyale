@@ -2,6 +2,7 @@ package com.example.cruiseroyalebe.service.impl;
 
 import com.example.cruiseroyalebe.entity.Role;
 import com.example.cruiseroyalebe.entity.User;
+import com.example.cruiseroyalebe.modal.request.RegisterRequest;
 import com.example.cruiseroyalebe.repository.RoleRepository;
 import com.example.cruiseroyalebe.repository.UserRepository;
 import com.example.cruiseroyalebe.service.UserService;
@@ -35,6 +36,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+
 
     @Override
     public Role saveRole(Role role) {

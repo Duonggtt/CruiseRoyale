@@ -2,6 +2,7 @@ package com.example.cruiseroyalebe.service;
 
 import com.example.cruiseroyalebe.entity.Role;
 import com.example.cruiseroyalebe.entity.User;
+import com.example.cruiseroyalebe.modal.request.RegisterRequest;
 
 import java.util.List;
 
