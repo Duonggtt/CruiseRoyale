@@ -48,7 +48,12 @@ public class UserResource {
     }
 
     @PostMapping("/user/save")
-    public ResponseEntity<User> saveUser(@RequestBody User user) {
+    public ResponseEntity<?> saveUser(@RequestBody User user) {
+        User existingUser = userService.getUser(user.getUsername());
+        if (existingUser != null) {
+            // User with the same username already exists
+            return ResponseEntity.badRequest().body("Error: Username is already taken!");
+        }
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
