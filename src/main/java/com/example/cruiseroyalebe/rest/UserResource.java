@@ -47,6 +47,21 @@ public class UserResource {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
+    @PutMapping("/user/update")
+    public ResponseEntity<User> updateUser(@RequestParam String username, @RequestBody User request) {
+        return ResponseEntity.ok().body(userService.updateUser(username, request));
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(userService.getUserById(id));
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<User> getUserByUsername(@RequestParam String username) {
+        return ResponseEntity.ok().body(userService.getUserByUsername(username));
+    }
+
     @PostMapping("/user/save")
     public ResponseEntity<?> saveUser(@RequestBody User user) {
         User existingUser = userService.getUser(user.getUsername());

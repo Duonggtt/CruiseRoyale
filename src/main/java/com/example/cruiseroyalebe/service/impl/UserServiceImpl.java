@@ -2,6 +2,7 @@ package com.example.cruiseroyalebe.service.impl;
 
 import com.example.cruiseroyalebe.entity.Role;
 import com.example.cruiseroyalebe.entity.User;
+import com.example.cruiseroyalebe.exception.NotFoundException;
 import com.example.cruiseroyalebe.modal.request.RegisterRequest;
 import com.example.cruiseroyalebe.repository.RoleRepository;
 import com.example.cruiseroyalebe.repository.UserRepository;
@@ -37,6 +38,34 @@ public class UserServiceImpl implements UserService,UserDetailsService {
         return userRepository.save(user);
     }
 
+    @Override
+    public User updateUser(String name, User request) {
+        User user = userRepository.findByUsername(name);
+        if(user == null) {
+            throw new NotFoundException("User by username " + name + " was not found");
+        }
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        user.setPhone(request.getPhone());
+        user.setAddress(request.getAddress());
+        userRepository.save(user);
+        return user;
+    }
+
+    @Override
+    public User getUserById(Integer id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User by id " + id + " was not found"));
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if(user == null) {
+            throw new NotFoundException("User by username " + username + " was not found");
+        }
+        return user;
+    }
 
     @Override
     public Role saveRole(Role role) {
