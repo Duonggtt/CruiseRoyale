@@ -11,6 +11,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -127,6 +128,32 @@ public class CruiseServiceImpl implements CruiseService {
     @Override
     public List<Cruise> getCruises() {
         return cruiseRepository.findAll();
+    }
+     
+    @Override
+    public Page<Cruise> findCruisesByPriceRange(int priceRange, Integer page, Integer limit , String sortField, String sortDirection) {
+        BigDecimal minPrice;
+        BigDecimal maxPrice;
+
+        switch (priceRange) {
+            case 1:
+                minPrice = BigDecimal.valueOf(1000000);
+                maxPrice = BigDecimal.valueOf(3000000);
+                break;
+            case 2:
+                minPrice = BigDecimal.valueOf(3000000);
+                maxPrice = BigDecimal.valueOf(6000000);
+                break;
+            case 3:
+                minPrice = BigDecimal.valueOf(6000000);
+                maxPrice = BigDecimal.valueOf(Long.MAX_VALUE);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid price range");
+        }
+        Sort sort = Sort.by(sortDirection.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortField);
+        PageRequest pageRequest = PageRequest.of(page - 1, limit, sort);
+        return cruiseRepository.findAllByPriceRange(minPrice, maxPrice, pageRequest);
     }
 
 }

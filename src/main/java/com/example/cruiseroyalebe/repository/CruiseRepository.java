@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Repository
@@ -18,4 +19,7 @@ public interface CruiseRepository extends JpaRepository<Cruise, Integer> {
             + "concat(c.id, c.name)"
             + "LIKE %?1%")
     Page<Cruise> findAll(String keyword, Pageable pageable);
+
+    @Query("select p from Cruise p where p.price >= :minPrice and p.price <= :maxPrice order by p.price desc")
+    Page<Cruise> findAllByPriceRange(BigDecimal minPrice, BigDecimal maxPrice, Pageable pageable);
 }

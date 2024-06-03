@@ -46,4 +46,15 @@ public class CruiseController {
     public void deleteCruise(@PathVariable Integer id) {
         cruiseService.deleteCruise(id);
     }
+
+    @GetMapping
+    public ResponseEntity<?> getCruisesByPriceRange(
+            @RequestParam(defaultValue = "1") int priceRange,
+            @RequestParam(required = false, defaultValue = "id") String sortField,
+            @RequestParam(required = false, defaultValue = "esc") String sortDirection,
+            @RequestParam(required = false, defaultValue = "1") Integer page,
+            @RequestParam(required = false, defaultValue = "10") Integer limit) {
+
+        return ResponseEntity.ok(cruiseService.findCruisesByPriceRange(priceRange,page, limit , sortField, sortDirection));
+    }
 }

@@ -4,8 +4,10 @@ import com.example.cruiseroyalebe.entity.Cruise;
 import com.example.cruiseroyalebe.entity.Location;
 import com.example.cruiseroyalebe.modal.request.UpsertCruiseRequest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface CruiseService {
@@ -17,4 +19,5 @@ public interface CruiseService {
     Cruise getCruiseById(Integer id);
     void deleteCruise(Integer id);
     List<Cruise> getCruises();
+    Page<Cruise> findCruisesByPriceRange(int priceRange, Integer page, Integer limit , String sortField, String sortDirection);
 }
