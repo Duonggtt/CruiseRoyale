@@ -14,7 +14,6 @@ public class UpsertBookingRequest {
     private Date bookingDate;
     private Date orderDate;
     private int guestQuantity;
-    private BigDecimal totalPrice;
     private String note;
     private Boolean bookingStatus;
     private Boolean paymentStatus;

@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -22,4 +23,7 @@ public interface CruiseRepository extends JpaRepository<Cruise, Integer> {
 
     @Query("select p from Cruise p where p.price >= :minPrice and p.price <= :maxPrice order by p.price desc")
     Page<Cruise> findAllByPriceRange(BigDecimal minPrice, BigDecimal maxPrice, Pageable pageable);
+
+    @Query(value = "SELECT c.* FROM cruise c JOIN (SELECT cruise_id, COUNT(*) as booking_count FROM booking GROUP BY cruise_id ORDER BY booking_count DESC LIMIT 6) b ON c.id = b.cruise_id", nativeQuery = true)
+    List<Cruise> getSomeFeaturedCruise();
 }

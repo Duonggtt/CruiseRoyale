@@ -24,6 +24,7 @@ public class CruiseServiceImpl implements CruiseService {
     private final LocationRepository locationRepository;
     private final TagRepository tagRepository;
     private final OwnerRepository ownerRepository;
+    private final ReviewRepository reviewRepository;
 
     @Override
     public Page<Cruise> getAllCruises(Integer page, Integer limit , String sortField, String sortDirection) {
@@ -154,6 +155,11 @@ public class CruiseServiceImpl implements CruiseService {
         Sort sort = Sort.by(sortDirection.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortField);
         PageRequest pageRequest = PageRequest.of(page - 1, limit, sort);
         return cruiseRepository.findAllByPriceRange(minPrice, maxPrice, pageRequest);
+    }
+
+    @Override
+    public List<Cruise> getSomeFeaturedCruise() {
+        return cruiseRepository.getSomeFeaturedCruise();
     }
 
 }

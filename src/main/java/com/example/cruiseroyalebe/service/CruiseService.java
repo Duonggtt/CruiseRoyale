@@ -20,4 +20,6 @@ public interface CruiseService {
     void deleteCruise(Integer id);
     List<Cruise> getCruises();
     Page<Cruise> findCruisesByPriceRange(int priceRange, Integer page, Integer limit , String sortField, String sortDirection);
+
+    List<Cruise> getSomeFeaturedCruise();
 }

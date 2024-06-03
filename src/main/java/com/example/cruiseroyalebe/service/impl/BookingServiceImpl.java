@@ -74,7 +74,7 @@ public class BookingServiceImpl implements BookingService {
         booking.setBookingDate(request.getBookingDate());
         booking.setOrderDate(request.getOrderDate());
         booking.setGuestQuantity(request.getGuestQuantity());
-        booking.setTotalPrice(request.getTotalPrice());
+        booking.setTotalPrice(cabin.getCabinType().getPrice().add(cruise.getPrice()));
         booking.setNote(request.getNote());
         booking.setBookingStatus(request.getBookingStatus());
         booking.setPaymentStatus(request.getPaymentStatus());
@@ -102,8 +102,7 @@ public class BookingServiceImpl implements BookingService {
         booking.setBookingDate(request.getBookingDate());
         booking.setOrderDate(request.getOrderDate());
         booking.setGuestQuantity(request.getGuestQuantity());
-        booking.setTotalPrice(request.getTotalPrice());
-        booking.setNote(request.getNote());
+        booking.setTotalPrice(cabin.getCabinType().getPrice().add(cruise.getPrice()));        booking.setNote(request.getNote());
         booking.setBookingStatus(request.getBookingStatus());
         booking.setPaymentStatus(request.getPaymentStatus());
         booking.setUser(user);
