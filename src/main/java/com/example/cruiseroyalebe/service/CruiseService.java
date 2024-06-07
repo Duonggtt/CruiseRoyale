@@ -2,6 +2,7 @@ package com.example.cruiseroyalebe.service;
 
 import com.example.cruiseroyalebe.entity.Cruise;
 import com.example.cruiseroyalebe.entity.Location;
+import com.example.cruiseroyalebe.modal.dto.CruiseDto;
 import com.example.cruiseroyalebe.modal.request.UpsertCruiseRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,8 +19,8 @@ public interface CruiseService {
     Cruise updateCruise(Integer id, UpsertCruiseRequest request);
     Cruise getCruiseById(Integer id);
     void deleteCruise(Integer id);
-    List<Cruise> getCruises();
-    Page<Cruise> findCruisesByPriceRange(int priceRange, Integer page, Integer limit , String sortField, String sortDirection);
+    List<CruiseDto> getCruises();
+    Page<CruiseDto> findCruisesByPriceRange(int priceRange, Integer page, Integer limit , String sortField, String sortDirection);
 
-    List<Cruise> getSomeFeaturedCruise();
+    List<CruiseDto> getSomeFeaturedCruise();
 }

@@ -47,7 +47,7 @@ public class CruiseController {
         cruiseService.deleteCruise(id);
     }
 
-    @GetMapping
+    @GetMapping("/filter-by-price")
     public ResponseEntity<?> getCruisesByPriceRange(@RequestParam(defaultValue = "1") int priceRange,
                                                     @RequestParam(required = false, defaultValue = "id") String sortField,
                                                     @RequestParam(required = false, defaultValue = "esc") String sortDirection,

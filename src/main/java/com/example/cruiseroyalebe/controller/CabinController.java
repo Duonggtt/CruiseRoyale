@@ -18,6 +18,7 @@ import javax.validation.Valid;
 public class CabinController {
     public final CabinService cabinService;
 
+
     @GetMapping("/")
     public ResponseEntity<?> getAllCabins(@RequestParam(required = false, defaultValue = "id") String sortField,
                                              @RequestParam(required = false, defaultValue = "esc") String sortDirection,

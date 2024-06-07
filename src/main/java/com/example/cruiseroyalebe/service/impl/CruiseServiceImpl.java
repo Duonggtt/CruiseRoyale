@@ -2,6 +2,7 @@ package com.example.cruiseroyalebe.service.impl;
 
 import com.example.cruiseroyalebe.entity.*;
 import com.example.cruiseroyalebe.exception.NotFoundException;
+import com.example.cruiseroyalebe.modal.dto.CruiseDto;
 import com.example.cruiseroyalebe.modal.request.UpsertCruiseRequest;
 import com.example.cruiseroyalebe.repository.*;
 import com.example.cruiseroyalebe.service.CruiseService;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +26,7 @@ public class CruiseServiceImpl implements CruiseService {
     private final LocationRepository locationRepository;
     private final TagRepository tagRepository;
     private final OwnerRepository ownerRepository;
+    private final CruiseImageRepository cruiseImageRepository;
     private final ReviewRepository reviewRepository;
 
     @Override
@@ -63,7 +66,6 @@ public class CruiseServiceImpl implements CruiseService {
                 .orElseThrow(() -> new NotFoundException("Owner not found with id= " + request.getOwnerId()));
         Location location = locationRepository.findById(request.getLocationId())
                 .orElseThrow(() -> new NotFoundException("location not found with id= " + request.getLocationId()));
-
         Cruise cruise = new Cruise();
         cruise.setName(request.getName());
         cruise.setLaunchedYear(request.getLaunchedYear());
@@ -127,12 +129,15 @@ public class CruiseServiceImpl implements CruiseService {
     }
 
     @Override
-    public List<Cruise> getCruises() {
-        return cruiseRepository.findAll();
+    public List<CruiseDto> getCruises() {
+        List<Cruise> cruises = cruiseRepository.findAll();
+        return cruises.stream()
+                .map(this::convertToCruiseDto)
+                .collect(Collectors.toList());
     }
-     
+
     @Override
-    public Page<Cruise> findCruisesByPriceRange(int priceRange, Integer page, Integer limit , String sortField, String sortDirection) {
+    public Page<CruiseDto> findCruisesByPriceRange(int priceRange, Integer page, Integer limit, String sortField, String sortDirection) {
         BigDecimal minPrice;
         BigDecimal maxPrice;
 
@@ -152,14 +157,65 @@ public class CruiseServiceImpl implements CruiseService {
             default:
                 throw new IllegalArgumentException("Invalid price range");
         }
+
         Sort sort = Sort.by(sortDirection.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortField);
         PageRequest pageRequest = PageRequest.of(page - 1, limit, sort);
-        return cruiseRepository.findAllByPriceRange(minPrice, maxPrice, pageRequest);
+        Page<Cruise> cruisePage = cruiseRepository.findAllByPriceRange(minPrice, maxPrice, pageRequest);
+        return cruisePage.map(this::convertToCruiseDto);
     }
 
     @Override
-    public List<Cruise> getSomeFeaturedCruise() {
-        return cruiseRepository.getSomeFeaturedCruise();
+    public List<CruiseDto> getSomeFeaturedCruise() {
+        List<Cruise> cruises = cruiseRepository.getSomeFeaturedCruise();
+        return cruises.stream()
+                .map(this::convertToCruiseDto)
+                .collect(Collectors.toList());
+    }
+
+    private CruiseDto convertToCruiseDto(Cruise cruise) {
+        CruiseDto cruiseDto = new CruiseDto();
+        cruiseDto.setId(cruise.getId());
+        cruiseDto.setName(cruise.getName());
+        cruiseDto.setLaunchedYear(cruise.getLaunchedYear());
+        cruiseDto.setCabinQuantity(cruise.getCabinQuantity());
+        cruiseDto.setMaterial(cruise.getMaterial());
+        cruiseDto.setDescription(cruise.getDescription());
+        cruiseDto.setPrice(cruise.getPrice());
+        cruiseDto.setOwnedDate(cruise.getOwnedDate());
+        cruiseDto.setDepartureTime(cruise.getDepartureTime());
+        cruiseDto.setArrivalTime(cruise.getArrivalTime());
+
+        // Map ruleIds
+        List<Integer> ruleIds = cruise.getRules().stream()
+                .map(Rule::getId)
+                .collect(Collectors.toList());
+        cruiseDto.setRuleIds(ruleIds);
+
+        // Map tagIds
+        List<Integer> tagIds = cruise.getTags().stream()
+                .map(Tag::getId)
+                .collect(Collectors.toList());
+        cruiseDto.setTagIds(tagIds);
+
+        // Set locationId
+        cruiseDto.setLocationId(cruise.getLocation().getId());
+
+        // Set ownerId
+        cruiseDto.setOwnerId(cruise.getOwner().getId());
+
+        // Map imageIds
+        List<CruiseImage> cruiseImages = cruiseImageRepository.findAllByCruiseId(cruise.getId());
+        List<Integer> imageIds = cruiseImages.stream()
+                .map(CruiseImage::getId)
+                .collect(Collectors.toList());
+        cruiseDto.setImageIds(imageIds);
+
+        // Set reviewId
+//        if (cruise.getReview() != null) {
+//            cruiseDto.setReviewId(cruise.getReview().getId());
+//        }
+
+        return cruiseDto;
     }
 
 }
