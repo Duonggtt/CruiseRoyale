@@ -12,8 +12,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface CruiseService {
-    Page<Cruise> getAllCruises(Integer page, Integer limit , String sortField, String sortDirection);
-    Page<Cruise> findPaginated(Integer page, Integer limit, String sortField, String sortDirection, String keyword);
+    Page<CruiseDto> getAllCruises(Integer page, Integer limit , String sortField, String sortDirection);
+    Page<CruiseDto> findPaginated(Integer page, Integer limit, String sortField, String sortDirection, String keyword);
     Sort buildSort(String sortField, String sortDirection);
     Cruise createCruise(UpsertCruiseRequest request);
     Cruise updateCruise(Integer id, UpsertCruiseRequest request);

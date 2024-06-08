@@ -30,27 +30,30 @@ public class CruiseServiceImpl implements CruiseService {
     private final ReviewRepository reviewRepository;
 
     @Override
-    public Page<Cruise> getAllCruises(Integer page, Integer limit , String sortField, String sortDirection) {
+    public Page<CruiseDto> getAllCruises(Integer page, Integer limit , String sortField, String sortDirection) {
         Sort sort = Sort.by(sortDirection.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortField);
         PageRequest pageRequest = PageRequest.of(page - 1, limit, sort);
-        return cruiseRepository.findAll(pageRequest);
+        Page<Cruise> cruisePage = cruiseRepository.findAll(pageRequest);
+        List<CruiseDto> cruiseDtos = cruisePage.getContent().stream()
+                .map(this::convertToCruiseDto)
+                .collect(Collectors.toList());
+        return new PageImpl<>(cruiseDtos, pageRequest, cruisePage.getTotalElements());
     }
 
     @Override
-    public Page<Cruise> findPaginated(Integer page, Integer limit, String sortField, String sortDirection, String keyword) {
+    public Page<CruiseDto> findPaginated(Integer page, Integer limit, String sortField, String sortDirection, String keyword) {
         Sort sort = buildSort(sortField, sortDirection);
-
         Pageable pageable = PageRequest.of(page - 1, limit, sort);
         Page<Cruise> cruisePage;
         if(keyword != null) {
-            cruisePage = cruiseRepository.findAll(keyword,pageable);
-        }else {
+            cruisePage = cruiseRepository.findAll(keyword, pageable);
+        } else {
             cruisePage = cruiseRepository.findAll(pageable);
         }
-
-        List<Cruise> cruiseList = cruisePage.getContent();
-
-        return new PageImpl<>(cruiseList, pageable, cruisePage.getTotalElements());
+        List<CruiseDto> cruiseDtos = cruisePage.getContent().stream()
+                .map(this::convertToCruiseDto)
+                .collect(Collectors.toList());
+        return new PageImpl<>(cruiseDtos, pageable, cruisePage.getTotalElements());
     }
 
     @Override
