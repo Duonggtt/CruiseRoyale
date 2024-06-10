@@ -8,6 +8,9 @@ import com.example.cruiseroyalebe.entity.Role;
 import com.example.cruiseroyalebe.entity.User;
 import com.example.cruiseroyalebe.modal.request.LoginRequest;
 import com.example.cruiseroyalebe.modal.request.RoleToUserForm;
+import com.example.cruiseroyalebe.modal.request.UpsertUserRequest;
+import com.example.cruiseroyalebe.modal.respone.UserResponse;
+import com.example.cruiseroyalebe.service.RoleService;
 import com.example.cruiseroyalebe.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -40,11 +43,27 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class UserResource {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
+    private final RoleService roleService;
 
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
+    }
+
+    @GetMapping("/user/detail/{id}")
+    public ResponseEntity<UserResponse> getUserResponseById(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(userService.getUserResponseById(id));
+    }
+
+    @GetMapping("/roles")
+    public ResponseEntity<List<Role>> getRoles() {
+        return ResponseEntity.ok().body(roleService.getAllRoles());
+    }
+
+    @PutMapping("/user/update/{id}")
+    public ResponseEntity<UserResponse> updateUserById(@PathVariable Integer id, @RequestBody UpsertUserRequest request) {
+        return ResponseEntity.ok().body(userService.updateUserById(id, request));
     }
 
     @PutMapping("/user/update")

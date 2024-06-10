@@ -3,11 +3,16 @@ package com.example.cruiseroyalebe.service.impl;
 import com.example.cruiseroyalebe.entity.Role;
 import com.example.cruiseroyalebe.entity.User;
 import com.example.cruiseroyalebe.exception.NotFoundException;
+import com.example.cruiseroyalebe.mapper.UserMapper;
 import com.example.cruiseroyalebe.modal.request.RegisterRequest;
+import com.example.cruiseroyalebe.modal.request.UpsertUserRequest;
+import com.example.cruiseroyalebe.modal.respone.UserResponse;
 import com.example.cruiseroyalebe.repository.RoleRepository;
 import com.example.cruiseroyalebe.repository.UserRepository;
 import com.example.cruiseroyalebe.service.UserService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -53,6 +58,21 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     }
 
     @Override
+    public UserResponse updateUserById(Integer id, UpsertUserRequest request) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User by id " + id + " was not found"));
+        List<Role> roles = roleRepository.findAllById(request.getRoleIds());
+
+        user.setName(request.getName());
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPhone(request.getPhone());
+        user.setAddress(request.getAddress());
+        user.setRoles(roles);
+        return toUserResponse(userRepository.save(user));
+    }
+
+    @Override
     public User getUserById(Integer id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User by id " + id + " was not found"));
@@ -85,6 +105,31 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     public User getUser(String username) {
         log.info("Fetching user {}" , username);
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public UserResponse getUserResponseById(Integer id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User by id " + id + " was not found"));
+        return toUserResponse(user);
+    }
+
+    UserResponse toUserResponse(User user) {
+        UserResponse userResponse = new UserResponse();
+        userResponse.setId(user.getId());
+        userResponse.setName(user.getName());
+        userResponse.setUsername(user.getUsername());
+        userResponse.setEmail(user.getEmail());
+        userResponse.setPhone(user.getPhone());
+        userResponse.setAddress(user.getAddress());
+        userResponse.setRoleIds(user.getRoles().stream().map(Role::getId).toList());
+        return userResponse;
+    }
+
+    @Override
+    public List<UserResponse> getAllUsers() {
+        log.info("Fetching all users");
+        return userRepository.findAllUsers();
     }
 
     @Override
