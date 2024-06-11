@@ -2,6 +2,7 @@ package com.example.cruiseroyalebe.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.example.cruiseroyalebe.entity.Role;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -69,6 +70,10 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN") || role.getAuthority().equals("ROLE_EMPLOYEE"));
         tokens.put("isAdminOrEmployee", isAdminOrEmployee ? "true" : "false");
         System.out.println("Roles: " + user.getAuthorities());
+        String role = user.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+                .findFirst()
+                .orElse("");;
+        tokens.put("role", role);
         response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
     }

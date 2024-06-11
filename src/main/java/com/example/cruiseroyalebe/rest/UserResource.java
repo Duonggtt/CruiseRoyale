@@ -157,6 +157,10 @@ public class UserResource {
         boolean isAdminOrEmployee = user.getRoles().stream()
                 .anyMatch(role -> role.getName().equals("ADMIN") || role.getName().equals("EMPLOYEE"));
         tokens.put("isAdminOrEmployee", isAdminOrEmployee ? "true" : "false");
+        String role = user.getRoles().stream().map(Role::getName)
+                .findFirst()
+                .orElse("");;
+        tokens.put("role", role);
         return ResponseEntity.ok(tokens);
     }
 
