@@ -65,8 +65,9 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         tokens.put("refresh_token", refresh_token);
 
         // Check if user has ADMIN role
-        boolean isAdmin = user.getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
-        tokens.put("isAdmin", isAdmin ? "true" : "false");
+        boolean isAdminOrEmployee = user.getAuthorities().stream()
+                .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN") || role.getAuthority().equals("ROLE_EMPLOYEE"));
+        tokens.put("isAdminOrEmployee", isAdminOrEmployee ? "true" : "false");
         System.out.println("Roles: " + user.getAuthorities());
         response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);

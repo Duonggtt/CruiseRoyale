@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UpsertUserRequest {
+public class UpdateUserRequest {
     private String name;
     private String username;
     private String email;

@@ -4,8 +4,9 @@ import com.example.cruiseroyalebe.entity.Role;
 import com.example.cruiseroyalebe.entity.User;
 import com.example.cruiseroyalebe.exception.NotFoundException;
 import com.example.cruiseroyalebe.mapper.UserMapper;
+import com.example.cruiseroyalebe.modal.request.CreateUserRequest;
 import com.example.cruiseroyalebe.modal.request.RegisterRequest;
-import com.example.cruiseroyalebe.modal.request.UpsertUserRequest;
+import com.example.cruiseroyalebe.modal.request.UpdateUserRequest;
 import com.example.cruiseroyalebe.modal.respone.UserResponse;
 import com.example.cruiseroyalebe.repository.RoleRepository;
 import com.example.cruiseroyalebe.repository.UserRepository;
@@ -58,7 +59,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     }
 
     @Override
-    public UserResponse updateUserById(Integer id, UpsertUserRequest request) {
+    public UserResponse updateUserById(Integer id, UpdateUserRequest request) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User by id " + id + " was not found"));
         List<Role> roles = roleRepository.findAllById(request.getRoleIds());
@@ -70,6 +71,26 @@ public class UserServiceImpl implements UserService,UserDetailsService {
         user.setAddress(request.getAddress());
         user.setRoles(roles);
         return toUserResponse(userRepository.save(user));
+    }
+
+    @Override
+    public UserResponse createUser(CreateUserRequest request) {
+        List<Role> roles = roleRepository.findAllById(request.getRoleIds());
+
+        User user = new User();
+        user.setName(request.getName());
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPhone(request.getPhone());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setAddress(request.getAddress());
+        user.setRoles(roles);
+        return toUserResponse(userRepository.save(user));
+    }
+
+    @Override
+    public void removeUserById(Integer id) {
+        userRepository.deleteById(id);
     }
 
     @Override

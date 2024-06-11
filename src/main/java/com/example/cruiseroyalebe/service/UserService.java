@@ -2,8 +2,9 @@ package com.example.cruiseroyalebe.service;
 
 import com.example.cruiseroyalebe.entity.Role;
 import com.example.cruiseroyalebe.entity.User;
+import com.example.cruiseroyalebe.modal.request.CreateUserRequest;
 import com.example.cruiseroyalebe.modal.request.RegisterRequest;
-import com.example.cruiseroyalebe.modal.request.UpsertUserRequest;
+import com.example.cruiseroyalebe.modal.request.UpdateUserRequest;
 import com.example.cruiseroyalebe.modal.respone.UserResponse;
 
 import java.util.List;
@@ -19,5 +20,7 @@ public interface UserService {
     List<UserResponse> getAllUsers();
     List<User> getUsers();
     User updateUser(String name, User request);
-    UserResponse updateUserById(Integer id, UpsertUserRequest request);
+    UserResponse updateUserById(Integer id, UpdateUserRequest request);
+    UserResponse createUser(CreateUserRequest request);
+    void removeUserById(Integer id);
 }

@@ -6,9 +6,10 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.cruiseroyalebe.entity.Role;
 import com.example.cruiseroyalebe.entity.User;
+import com.example.cruiseroyalebe.modal.request.CreateUserRequest;
 import com.example.cruiseroyalebe.modal.request.LoginRequest;
 import com.example.cruiseroyalebe.modal.request.RoleToUserForm;
-import com.example.cruiseroyalebe.modal.request.UpsertUserRequest;
+import com.example.cruiseroyalebe.modal.request.UpdateUserRequest;
 import com.example.cruiseroyalebe.modal.respone.UserResponse;
 import com.example.cruiseroyalebe.service.RoleService;
 import com.example.cruiseroyalebe.service.UserService;
@@ -61,14 +62,24 @@ public class UserResource {
         return ResponseEntity.ok().body(roleService.getAllRoles());
     }
 
-    @PutMapping("/user/update/{id}")
-    public ResponseEntity<UserResponse> updateUserById(@PathVariable Integer id, @RequestBody UpsertUserRequest request) {
+    @PutMapping("/auth/user/update/{id}")
+    public ResponseEntity<UserResponse> updateUserById(@PathVariable Integer id, @RequestBody UpdateUserRequest request) {
         return ResponseEntity.ok().body(userService.updateUserById(id, request));
+    }
+
+    @DeleteMapping("/auth/user/{id}")
+    public void removeUserById(@PathVariable Integer id) {
+        userService.removeUserById(id);
     }
 
     @PutMapping("/user/update")
     public ResponseEntity<User> updateUser(@RequestParam String username, @RequestBody User request) {
         return ResponseEntity.ok().body(userService.updateUser(username, request));
+    }
+
+    @PostMapping("/auth/user/create")
+    public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest request) {
+        return ResponseEntity.ok().body(userService.createUser(request));
     }
 
     @GetMapping("/user/{id}")
@@ -143,8 +154,9 @@ public class UserResource {
         tokens.put("access_token", access_token);
         tokens.put("refresh_token", refresh_token);
         // Check if user has ADMIN role
-        boolean isAdmin = user.getRoles().stream().anyMatch(role -> role.getName().equals("ADMIN"));
-        tokens.put("isAdmin", isAdmin ? "true" : "false");
+        boolean isAdminOrEmployee = user.getRoles().stream()
+                .anyMatch(role -> role.getName().equals("ADMIN") || role.getName().equals("EMPLOYEE"));
+        tokens.put("isAdminOrEmployee", isAdminOrEmployee ? "true" : "false");
         return ResponseEntity.ok(tokens);
     }
 
