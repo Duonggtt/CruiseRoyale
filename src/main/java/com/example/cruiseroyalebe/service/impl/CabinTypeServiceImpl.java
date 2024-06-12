@@ -2,7 +2,10 @@ package com.example.cruiseroyalebe.service.impl;
 
 import com.example.cruiseroyalebe.entity.CabinType;
 import com.example.cruiseroyalebe.entity.Location;
+import com.example.cruiseroyalebe.entity.Tag;
+import com.example.cruiseroyalebe.modal.request.UpsertCabinTypeRequest;
 import com.example.cruiseroyalebe.repository.CabinTypeRepository;
+import com.example.cruiseroyalebe.repository.TagRepository;
 import com.example.cruiseroyalebe.service.CabinTypeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +22,8 @@ import java.util.List;
 public class CabinTypeServiceImpl implements CabinTypeService {
 
     private final CabinTypeRepository cabinTypeRepository;
+    private final TagRepository tagRepository;
+
     @Override
     public Page<CabinType> getAllCabinTypes(Integer page, Integer limit, String sortField, String sortDirection) {
         Sort sort = Sort.by(sortDirection.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortField);
@@ -49,19 +54,24 @@ public class CabinTypeServiceImpl implements CabinTypeService {
     }
 
     @Override
-    public CabinType createCabinType(CabinType request) {
+    public CabinType createCabinType(UpsertCabinTypeRequest request) {
+
+        List<Tag> tags = tagRepository.findAllById(request.getTagIds());
         CabinType cabinType = new CabinType();
         cabinType.setName(request.getName());
         cabinType.setRoomSize(request.getRoomSize());
         cabinType.setMaxGuests(request.getMaxGuests());
         cabinType.setDescription(request.getDescription());
         cabinType.setPrice(request.getPrice());
+        cabinType.setTags(tags);
         cabinTypeRepository.save(cabinType);
         return cabinType;
     }
 
     @Override
-    public CabinType updateCabinType(Integer id, CabinType request) {
+    public CabinType updateCabinType(Integer id, UpsertCabinTypeRequest request) {
+        List<Tag> tags = tagRepository.findAllById(request.getTagIds());
+
         CabinType cabinType = cabinTypeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("CabinType not found with id= " + id));
         cabinType.setName(request.getName());
@@ -69,6 +79,7 @@ public class CabinTypeServiceImpl implements CabinTypeService {
         cabinType.setMaxGuests(request.getMaxGuests());
         cabinType.setDescription(request.getDescription());
         cabinType.setPrice(request.getPrice());
+        cabinType.setTags(tags);
         cabinTypeRepository.save(cabinType);
         return cabinType;
     }

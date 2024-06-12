@@ -2,6 +2,7 @@ package com.example.cruiseroyalebe.controller;
 
 import com.example.cruiseroyalebe.entity.CabinType;
 import com.example.cruiseroyalebe.entity.Location;
+import com.example.cruiseroyalebe.modal.request.UpsertCabinTypeRequest;
 import com.example.cruiseroyalebe.service.CabinTypeService;
 import com.example.cruiseroyalebe.service.LocationService;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +28,12 @@ public class CabinTypeController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createCabinType(@Valid @RequestBody CabinType request) {
+    public ResponseEntity<?> createCabinType(@Valid @RequestBody UpsertCabinTypeRequest request) {
         return new ResponseEntity<>(cabinTypeService.createCabinType(request), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCabinType(@PathVariable Integer id,@Valid @RequestBody CabinType request) {
+    public ResponseEntity<?> updateCabinType(@PathVariable Integer id,@Valid @RequestBody UpsertCabinTypeRequest request) {
         return new ResponseEntity<>(cabinTypeService.updateCabinType(id,request), HttpStatus.CREATED);
     }
 
