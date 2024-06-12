@@ -17,6 +17,7 @@ public interface UserService {
     void addRoleToUser(String username, String roleName);
     User getUser(String username);
     UserResponse getUserResponseById(Integer id);
+    UserResponse register(RegisterRequest request);
     List<UserResponse> getAllUsers();
     List<User> getUsers();
     User updateUser(String name, User request);

@@ -6,10 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.cruiseroyalebe.entity.Role;
 import com.example.cruiseroyalebe.entity.User;
-import com.example.cruiseroyalebe.modal.request.CreateUserRequest;
-import com.example.cruiseroyalebe.modal.request.LoginRequest;
-import com.example.cruiseroyalebe.modal.request.RoleToUserForm;
-import com.example.cruiseroyalebe.modal.request.UpdateUserRequest;
+import com.example.cruiseroyalebe.modal.request.*;
 import com.example.cruiseroyalebe.modal.respone.UserResponse;
 import com.example.cruiseroyalebe.service.RoleService;
 import com.example.cruiseroyalebe.service.UserService;
@@ -84,11 +81,6 @@ public class UserResource {
 
     @PostMapping("/auth/user/create")
     public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest request) {
-        return ResponseEntity.ok().body(userService.createUser(request));
-    }
-
-    @PostMapping("/user/register")
-    public ResponseEntity<UserResponse> register(@RequestBody CreateUserRequest request) {
         return ResponseEntity.ok().body(userService.createUser(request));
     }
 
