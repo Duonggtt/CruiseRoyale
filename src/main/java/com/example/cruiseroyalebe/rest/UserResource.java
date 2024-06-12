@@ -105,6 +105,17 @@ public class UserResource {
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
+    @PostMapping("/user/register")
+    public ResponseEntity<?> register(@RequestBody User user) {
+        User existingUser = userService.getUser(user.getUsername());
+        if (existingUser != null) {
+            // User with the same username already exists
+            return ResponseEntity.badRequest().body("Error: Username is already taken!");
+        }
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/register").toUriString());
+        return ResponseEntity.created(uri).body(userService.saveUserRegister(user));
+    }
+
     @PostMapping("/role/save")
     public ResponseEntity<Role> saveRole(@RequestBody Role role) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());

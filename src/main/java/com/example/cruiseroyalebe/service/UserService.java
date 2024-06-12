@@ -16,6 +16,7 @@ public interface UserService {
     User getUserByUsername(String username);
     void addRoleToUser(String username, String roleName);
     User getUser(String username);
+    User saveUserRegister(User user);
     UserResponse getUserResponseById(Integer id);
     UserResponse register(RegisterRequest request);
     List<UserResponse> getAllUsers();

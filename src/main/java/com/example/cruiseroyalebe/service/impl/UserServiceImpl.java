@@ -48,6 +48,16 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     }
 
     @Override
+    public User saveUserRegister(User user) {
+        user.setName(user.getName());
+        log.info("Saving new user {} to the database", user.getName());
+        user.setPassword(passwordEncoder.encode("123"));
+        user.setEmail(user.getEmail());
+        user.setPhone(user.getPhone());
+        return userRepository.save(user);
+    }
+
+    @Override
     public User updateUser(String name, User request) {
         User user = userRepository.findByUsername(name);
         if(user == null) {
