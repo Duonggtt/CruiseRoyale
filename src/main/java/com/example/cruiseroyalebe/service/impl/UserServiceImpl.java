@@ -89,6 +89,15 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     }
 
     @Override
+    public UserResponse getUserResponseByPhone(String phone) {
+        User user = userRepository.findByPhone(phone);
+        if(user == null) {
+            throw new NotFoundException("User by phone " + phone + " was not found");
+        }
+        return toUserResponse(user);
+    }
+
+    @Override
     public void removeUserById(Integer id) {
         userRepository.deleteById(id);
     }

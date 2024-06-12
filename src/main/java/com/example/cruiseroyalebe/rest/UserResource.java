@@ -57,6 +57,11 @@ public class UserResource {
         return ResponseEntity.ok().body(userService.getUserResponseById(id));
     }
 
+    @GetMapping("/user/search-by-phone")
+    public ResponseEntity<UserResponse> getUserResponseByPhone(@RequestParam String phone) {
+        return ResponseEntity.ok().body(userService.getUserResponseByPhone(phone));
+    }
+
     @GetMapping("/roles")
     public ResponseEntity<List<Role>> getRoles() {
         return ResponseEntity.ok().body(roleService.getAllRoles());
@@ -79,6 +84,11 @@ public class UserResource {
 
     @PostMapping("/auth/user/create")
     public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest request) {
+        return ResponseEntity.ok().body(userService.createUser(request));
+    }
+
+    @PostMapping("/user/register")
+    public ResponseEntity<UserResponse> register(@RequestBody CreateUserRequest request) {
         return ResponseEntity.ok().body(userService.createUser(request));
     }
 

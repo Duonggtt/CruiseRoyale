@@ -95,6 +95,11 @@ public class CabinServiceImpl implements CabinService {
     }
 
     @Override
+    public List<Cabin> getAllCabinByCruiseId(Integer cruiseId) {
+        return cabinRepository.findAllByCruiseId(cruiseId);
+    }
+
+    @Override
     public void deleteCabin(Integer id) {
         Cabin cabin = cabinRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cabin not found with id= " + id));

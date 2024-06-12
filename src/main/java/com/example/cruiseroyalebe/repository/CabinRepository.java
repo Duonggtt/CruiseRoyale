@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -18,4 +19,6 @@ public interface CabinRepository extends JpaRepository<Cabin, Integer> {
             + "concat(c.id, c.cabinType.name, c.cruise.name)"
             + "LIKE %?1%")
     Page<Cabin> findAll(String keyword, Pageable pageable);
+
+    List<Cabin> findAllByCruiseId(Integer cruiseId);
 }

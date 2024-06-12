@@ -16,5 +16,6 @@ public interface CabinService {
     Cabin updateCabin(Integer id, UpsertCabinRequest request);
     Cabin getCabinById(Integer id);
     void deleteCabin(Integer id);
+    List<Cabin> getAllCabinByCruiseId(Integer cruiseId);
     List<Cabin> getCabins();
 }

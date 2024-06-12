@@ -23,4 +23,5 @@ public interface UserService {
     UserResponse updateUserById(Integer id, UpdateUserRequest request);
     UserResponse createUser(CreateUserRequest request);
     void removeUserById(Integer id);
+    UserResponse getUserResponseByPhone(String phone);
 }

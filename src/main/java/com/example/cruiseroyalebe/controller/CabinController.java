@@ -42,6 +42,11 @@ public class CabinController {
         return ResponseEntity.ok(cabinService.getCabinById(id));
     }
 
+    @GetMapping("")
+    public ResponseEntity<?> getAllCabinByCruiseId(@RequestParam Integer cruiseId) {
+        return ResponseEntity.ok(cabinService.getAllCabinByCruiseId(cruiseId));
+    }
+
     @DeleteMapping("/{id}")
     public void deleteCabin(@PathVariable Integer id) {
         cabinService.deleteCabin(id);

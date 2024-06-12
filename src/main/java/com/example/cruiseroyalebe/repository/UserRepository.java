@@ -14,4 +14,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("Select u from User u")
     List<UserResponse> findAllUsers();
     void deleteById(Integer id);
+    @Query("Select u from User u where u.phone = ?1")
+    User findByPhone(String phone);
 }
