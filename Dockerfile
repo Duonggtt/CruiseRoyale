@@ -1,10 +1,14 @@
-FROM maven:4.0.0-openjdk-17 AS build
-WORKDIR /app
-COPY . /app/
-RUN mvn clean package
+# Sử dụng OpenJDK 17 làm base image
+FROM openjdk:17-jdk-slim
 
-FROM openjdk-17-alpine
+# Thiết lập thư mục làm việc trong container
 WORKDIR /app
-COPY --from=build /app/target/*.jar /app/app.jar
+
+# Sao chép file JAR của ứng dụng vào container
+COPY target/*.jar app.jar
+
+# Expose port 8080
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# Câu lệnh để chạy ứng dụng
+CMD ["java", "-jar", "app.jar"]
