@@ -31,6 +31,10 @@ public class CruiseController {
     public ResponseEntity<?> getAllCruises() {
         return ResponseEntity.ok(cruiseService.getAllCruises());
     }
+    @GetMapping("/auth")
+    public ResponseEntity<?> getAllCruisesAuth() {
+        return ResponseEntity.ok(cruiseService.getAllCruises());
+    }
 
     @PostMapping("/create")
     public ResponseEntity<?> createCruise(@Valid @RequestBody UpsertCruiseRequest request) {
