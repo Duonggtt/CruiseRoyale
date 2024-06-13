@@ -41,6 +41,12 @@ public class CruiseServiceImpl implements CruiseService {
     }
 
     @Override
+    public List<Cruise> getAllCruises() {
+        return cruiseRepository.findAll();
+    }
+
+
+    @Override
     public Page<CruiseDto> findPaginated(Integer page, Integer limit, String sortField, String sortDirection, String keyword) {
         Sort sort = buildSort(sortField, sortDirection);
         Pageable pageable = PageRequest.of(page - 1, limit, sort);

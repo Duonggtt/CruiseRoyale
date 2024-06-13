@@ -13,6 +13,7 @@ import java.util.List;
 
 public interface CruiseService {
     Page<CruiseDto> getAllCruises(Integer page, Integer limit , String sortField, String sortDirection);
+    List<Cruise> getAllCruises();
     Page<CruiseDto> findPaginated(Integer page, Integer limit, String sortField, String sortDirection, String keyword);
     Sort buildSort(String sortField, String sortDirection);
     Cruise createCruise(UpsertCruiseRequest request);

@@ -21,6 +21,7 @@ public interface CruiseRepository extends JpaRepository<Cruise, Integer> {
             + "LIKE %?1%")
     Page<Cruise> findAll(String keyword, Pageable pageable);
 
+
     @Query("select p from Cruise p where p.price >= :minPrice and p.price <= :maxPrice order by p.price desc")
     Page<Cruise> findAllByPriceRange(BigDecimal minPrice, BigDecimal maxPrice, Pageable pageable);
 

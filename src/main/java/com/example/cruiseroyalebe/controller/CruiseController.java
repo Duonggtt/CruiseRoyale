@@ -19,12 +19,17 @@ import javax.validation.Valid;
 public class CruiseController {
     public final CruiseService cruiseService;
 
-    @GetMapping("/")
-    public ResponseEntity<?> getAllCruises(@RequestParam(required = false, defaultValue = "id") String sortField,
+    @GetMapping("")
+    public ResponseEntity<?> getAllCruisesPagination(@RequestParam(required = false, defaultValue = "id") String sortField,
                                              @RequestParam(required = false, defaultValue = "esc") String sortDirection,
                                              @RequestParam(required = false, defaultValue = "1") Integer page,
                                              @RequestParam(required = false, defaultValue = "10") Integer limit) {
         return ResponseEntity.ok(cruiseService.getAllCruises(page, limit , sortField, sortDirection));
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<?> getAllCruises() {
+        return ResponseEntity.ok(cruiseService.getAllCruises());
     }
 
     @PostMapping("/create")
