@@ -80,7 +80,7 @@ public class UserResource {
     }
 
     @PostMapping("/auth/user/create")
-    public ResponseEntity<User> createUser(@RequestBody CreateUserRequest request) {
+    public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest request) {
         return ResponseEntity.ok().body(userService.createUser(request));
     }
 

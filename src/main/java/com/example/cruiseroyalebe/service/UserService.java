@@ -23,7 +23,7 @@ public interface UserService {
     List<User> getUsers();
     User updateUser(String name, User request);
     UserResponse updateUserById(Integer id, UpdateUserRequest request);
-    User createUser(CreateUserRequest request);
+    UserResponse createUser(CreateUserRequest request);
     void removeUserById(Integer id);
     UserResponse getUserResponseByPhone(String phone);
 }

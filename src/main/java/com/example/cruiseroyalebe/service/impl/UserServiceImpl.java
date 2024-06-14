@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     }
 
     @Override
-    public User createUser(CreateUserRequest request) {
+    public UserResponse createUser(CreateUserRequest request) {
         List<Role> roles = roleRepository.findAllById(request.getRoleIds());
 
         User user = new User();
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setAddress(request.getAddress());
         user.setRoles(roles);
-        return user;
+        return toUserResponse(userRepository.save(user));
     }
 
     @Override
