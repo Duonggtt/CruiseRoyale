@@ -48,18 +48,6 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     }
 
     @Override
-    public User createUser(User user) {
-        user.setName(user.getName());
-        log.info("Saving new user {} to the database", user.getName());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setAddress(user.getAddress());
-        user.setRoles(user.getRoles());
-        user.setEmail(user.getEmail());
-        user.setPhone(user.getPhone());
-        return userRepository.save(user);
-    }
-
-    @Override
     public User saveUserRegister(User user) {
         user.setName(user.getName());
         log.info("Saving new user {} to the database", user.getName());
@@ -99,7 +87,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     }
 
     @Override
-    public UserResponse createUser(CreateUserRequest request) {
+    public User createUser(CreateUserRequest request) {
         List<Role> roles = roleRepository.findAllById(request.getRoleIds());
 
         User user = new User();
@@ -110,7 +98,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setAddress(request.getAddress());
         user.setRoles(roles);
-        return toUserResponse(userRepository.save(user));
+        return user;
     }
 
     @Override

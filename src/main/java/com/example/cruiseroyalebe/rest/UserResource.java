@@ -80,7 +80,7 @@ public class UserResource {
     }
 
     @PostMapping("/auth/user/create")
-    public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest request) {
+    public ResponseEntity<User> createUser(@RequestBody CreateUserRequest request) {
         return ResponseEntity.ok().body(userService.createUser(request));
     }
 
@@ -102,7 +102,7 @@ public class UserResource {
             return ResponseEntity.badRequest().body("Error: Username is already taken!");
         }
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
-        return ResponseEntity.created(uri).body(userService.createUser(user));
+        return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
     @PostMapping("/user/register")

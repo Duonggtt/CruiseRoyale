@@ -11,7 +11,6 @@ import java.util.List;
 
 public interface UserService {
     User saveUser(User user);
-    User createUser(User user);
     Role saveRole(Role role);
     User getUserById(Integer id);
     User getUserByUsername(String username);
@@ -24,7 +23,7 @@ public interface UserService {
     List<User> getUsers();
     User updateUser(String name, User request);
     UserResponse updateUserById(Integer id, UpdateUserRequest request);
-    UserResponse createUser(CreateUserRequest request);
+    User createUser(CreateUserRequest request);
     void removeUserById(Integer id);
     UserResponse getUserResponseByPhone(String phone);
 }
