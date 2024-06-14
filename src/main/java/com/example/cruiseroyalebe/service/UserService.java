@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface UserService {
     User saveUser(User user);
+    User createUser(User user);
     Role saveRole(Role role);
     User getUserById(Integer id);
     User getUserByUsername(String username);

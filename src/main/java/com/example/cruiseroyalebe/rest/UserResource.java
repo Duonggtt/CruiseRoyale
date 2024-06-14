@@ -102,7 +102,7 @@ public class UserResource {
             return ResponseEntity.badRequest().body("Error: Username is already taken!");
         }
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
-        return ResponseEntity.created(uri).body(userService.saveUser(user));
+        return ResponseEntity.created(uri).body(userService.createUser(user));
     }
 
     @PostMapping("/user/register")
