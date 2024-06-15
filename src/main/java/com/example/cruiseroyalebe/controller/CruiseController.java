@@ -51,7 +51,7 @@ public class CruiseController {
         return ResponseEntity.ok(cruiseService.getCruiseById(id));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteCruise(@PathVariable Integer id) {
         cruiseService.deleteCruise(id);
     }
