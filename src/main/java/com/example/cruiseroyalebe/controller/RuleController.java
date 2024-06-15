@@ -40,6 +40,11 @@ public class RuleController {
         return ResponseEntity.ok(ruleService.getRuleById(id));
     }
 
+    @GetMapping("/auth")
+    public ResponseEntity<?> getRulesAuth() {
+        return ResponseEntity.ok(ruleService.getRules());
+    }
+
     @DeleteMapping("/{id}")
     public void deleteRule(@PathVariable Integer id) {
         ruleService.deleteRule(id);
