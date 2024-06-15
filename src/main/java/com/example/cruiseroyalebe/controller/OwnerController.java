@@ -28,7 +28,7 @@ public class OwnerController {
 
     @PostMapping("/create")
     public ResponseEntity<?> createOwner(@Valid @RequestBody Owner request) {
-        return new ResponseEntity<>(ownerService.createRule(request), HttpStatus.CREATED);
+        return new ResponseEntity<>(ownerService.createOwner(request), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
@@ -39,6 +39,11 @@ public class OwnerController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getOwnerById(@PathVariable Integer id) {
         return ResponseEntity.ok(ownerService.getOwnerById(id));
+    }
+
+    @GetMapping("/auth")
+    public ResponseEntity<?> getOwners() {
+        return ResponseEntity.ok(ownerService.getOwners());
     }
 
     @DeleteMapping("/{id}")

@@ -10,7 +10,7 @@ public interface OwnerService {
     Page<Owner> getAllOwners(Integer page, Integer limit , String sortField, String sortDirection);
     Page<Owner> findPaginated(Integer page, Integer limit, String sortField, String sortDirection, String keyword);
     Sort buildSort(String sortField, String sortDirection);
-    Owner createRule(Owner request);
+    Owner createOwner(Owner request);
     Owner updateOwner(Integer id, Owner request);
     Owner getOwnerById(Integer id);
     void deleteOwner(Integer id);

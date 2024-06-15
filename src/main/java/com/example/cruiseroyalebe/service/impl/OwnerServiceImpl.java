@@ -51,7 +51,7 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public Owner createRule(Owner request) {
+    public Owner createOwner(Owner request) {
         Owner owner = new Owner();
         owner.setName(request.getName());
         ownerRepository.save(owner);
