@@ -41,13 +41,18 @@ public class CruiseController {
         return new ResponseEntity<>(cruiseService.createCruise(request), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> updateCruise(@PathVariable Integer id,@Valid @RequestBody UpsertCruiseRequest request) {
         return new ResponseEntity<>(cruiseService.updateCruise(id,request), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getCruiseById(@PathVariable Integer id) {
+        return ResponseEntity.ok(cruiseService.getCruiseById(id));
+    }
+
+    @GetMapping("/auth/{id}")
+    public ResponseEntity<?> getCruiseByIdAuth(@PathVariable Integer id) {
         return ResponseEntity.ok(cruiseService.getCruiseById(id));
     }
 
