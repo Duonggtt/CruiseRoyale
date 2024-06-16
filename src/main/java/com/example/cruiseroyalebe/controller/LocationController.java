@@ -18,7 +18,7 @@ import javax.validation.Valid;
 public class LocationController {
     public final LocationService locationService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<?> getAllLocations(@RequestParam(required = false, defaultValue = "id") String sortField,
                                           @RequestParam(required = false, defaultValue = "esc") String sortDirection,
                                           @RequestParam(required = false, defaultValue = "1") Integer page,
@@ -44,5 +44,10 @@ public class LocationController {
     @DeleteMapping("/{id}")
     public void deleteLocation(@PathVariable Integer id) {
         locationService.deleteLocation(id);
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<?> getLocationsAuth() {
+        return ResponseEntity.ok(locationService.getLocations());
     }
 }

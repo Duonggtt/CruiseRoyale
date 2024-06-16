@@ -21,7 +21,9 @@ public interface CruiseService {
     Cruise getCruiseById(Integer id);
     void deleteCruise(Integer id);
     List<CruiseDto> getCruises();
-    Page<CruiseDto> findCruisesByPriceRange(int priceRange, Integer page, Integer limit , String sortField, String sortDirection);
+    List<Cruise> findCruisesByPriceRange(int priceRange);
 
     List<CruiseDto> getSomeFeaturedCruise();
+    List<Cruise> getCruisesByLocationId(Integer locationId);
+    List<Cruise> getCruisesByNameLike(String name);
 }

@@ -146,7 +146,7 @@ public class CruiseServiceImpl implements CruiseService {
     }
 
     @Override
-    public Page<CruiseDto> findCruisesByPriceRange(int priceRange, Integer page, Integer limit, String sortField, String sortDirection) {
+    public List<Cruise> findCruisesByPriceRange(int priceRange) {
         BigDecimal minPrice;
         BigDecimal maxPrice;
 
@@ -166,11 +166,7 @@ public class CruiseServiceImpl implements CruiseService {
             default:
                 throw new IllegalArgumentException("Invalid price range");
         }
-
-        Sort sort = Sort.by(sortDirection.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortField);
-        PageRequest pageRequest = PageRequest.of(page - 1, limit, sort);
-        Page<Cruise> cruisePage = cruiseRepository.findAllByPriceRange(minPrice, maxPrice, pageRequest);
-        return cruisePage.map(this::convertToCruiseDto);
+        return cruiseRepository.findAllByPriceRange(minPrice, maxPrice);
     }
 
     @Override
@@ -225,6 +221,16 @@ public class CruiseServiceImpl implements CruiseService {
 //        }
 
         return cruiseDto;
+    }
+
+    @Override
+    public List<Cruise> getCruisesByLocationId(Integer locationId) {
+        return cruiseRepository.findAllByLocation_Id(locationId);
+    }
+
+    @Override
+    public List<Cruise> getCruisesByNameLike(String name) {
+        return cruiseRepository.findAllByNameLike(name);
     }
 
 }

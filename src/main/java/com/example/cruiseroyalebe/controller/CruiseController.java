@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -62,17 +63,32 @@ public class CruiseController {
     }
 
     @GetMapping("/filter-by-price")
-    public ResponseEntity<?> getCruisesByPriceRange(@RequestParam(defaultValue = "1") int priceRange,
-                                                    @RequestParam(required = false, defaultValue = "id") String sortField,
-                                                    @RequestParam(required = false, defaultValue = "esc") String sortDirection,
-                                                    @RequestParam(required = false, defaultValue = "1") Integer page,
-                                                    @RequestParam(required = false, defaultValue = "10") Integer limit) {
-
-        return ResponseEntity.ok(cruiseService.findCruisesByPriceRange(priceRange,page, limit , sortField, sortDirection));
+    public ResponseEntity<?> getCruisesByPriceRange(@RequestParam int priceRange) {
+        List<Cruise> cruises = cruiseService.findCruisesByPriceRange(priceRange);
+        if(cruises.isEmpty()) {
+            return ResponseEntity.ok("Không tìm thấy tàu nào trong khoảng giá này");
+        }
+        return ResponseEntity.ok(cruiseService.findCruisesByPriceRange(priceRange));
     }
 
     @GetMapping("/featured")
     public ResponseEntity<?> getSomeFeaturedCruise() {
         return ResponseEntity.ok(cruiseService.getSomeFeaturedCruise());
     }
+
+    @GetMapping("/filter/locate/{locationId}")
+    public ResponseEntity<?> getCruisesByLocationId(@PathVariable Integer locationId) {
+        return ResponseEntity.ok(cruiseService.getCruisesByLocationId(locationId));
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<?> getCruisesByNameLike(@RequestParam String name) {
+        List<Cruise> cruises = cruiseService.getCruisesByNameLike(name);
+        if(cruises.isEmpty()) {
+            return ResponseEntity.ok("Không tìm thấy tàu nào chứa từ khóa: " + name);
+        }
+        return ResponseEntity.ok(cruiseService.getCruisesByNameLike(name));
+    }
+
+
 }
