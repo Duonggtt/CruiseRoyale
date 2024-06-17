@@ -90,5 +90,9 @@ public class CruiseController {
         return ResponseEntity.ok(cruiseService.getCruisesByNameLike(name));
     }
 
+    @GetMapping("/filter/tags")
+    public ResponseEntity<?> getCruisesByTagIds(@RequestParam List<Integer> tagIds) {
+        return ResponseEntity.ok(cruiseService.getCruisesByTagIds(tagIds));
+    }
 
 }

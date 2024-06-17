@@ -26,4 +26,5 @@ public interface CruiseService {
     List<CruiseDto> getSomeFeaturedCruise();
     List<Cruise> getCruisesByLocationId(Integer locationId);
     List<Cruise> getCruisesByNameLike(String name);
+    List<Cruise> getCruisesByTagIds(List<Integer> tagIds);
 }

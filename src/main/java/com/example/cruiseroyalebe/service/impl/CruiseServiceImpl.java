@@ -233,4 +233,9 @@ public class CruiseServiceImpl implements CruiseService {
         return cruiseRepository.findAllByNameLike(name);
     }
 
+    @Override
+    public List<Cruise> getCruisesByTagIds(List<Integer> tagIds) {
+        return cruiseRepository.findAllByTagIds(tagIds);
+    }
+
 }

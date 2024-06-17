@@ -33,4 +33,7 @@ public interface CruiseRepository extends JpaRepository<Cruise, Integer> {
     @Query("Select c from Cruise c where c.name like %?1%")
     List<Cruise> findAllByNameLike(String name);
 
+    @Query("SELECT DISTINCT c FROM Cruise c JOIN c.tags t WHERE t.id IN :tagIds")
+    List<Cruise> findAllByTagIds(List<Integer> tagIds);
+
 }
