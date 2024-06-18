@@ -5,6 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+
+import static javax.persistence.FetchType.LAZY;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -42,9 +45,8 @@ public class Booking {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "cabin_id")
-    private Cabin cabin;
+    @ManyToMany(fetch = LAZY)
+    private List<Cabin> cabin;
 
     @ManyToOne
     @JoinColumn(name = "cruise_id")

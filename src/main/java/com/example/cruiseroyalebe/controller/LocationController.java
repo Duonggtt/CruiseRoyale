@@ -47,6 +47,11 @@ public class LocationController {
     }
 
     @GetMapping("/")
+    public ResponseEntity<?> getLocations() {
+        return ResponseEntity.ok(locationService.getLocations());
+    }
+
+    @GetMapping("/auth/")
     public ResponseEntity<?> getLocationsAuth() {
         return ResponseEntity.ok(locationService.getLocations());
     }

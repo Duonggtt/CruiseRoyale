@@ -1,5 +1,6 @@
 package com.example.cruiseroyalebe.repository;
 
+import com.example.cruiseroyalebe.entity.Cabin;
 import com.example.cruiseroyalebe.entity.CabinType;
 import com.example.cruiseroyalebe.entity.Location;
 import org.springframework.data.domain.Page;
@@ -18,4 +19,5 @@ public interface CabinTypeRepository extends JpaRepository<CabinType, Integer> {
             + "concat(c.id, c.name)"
             + "LIKE %?1%")
     Page<CabinType> findAll(String keyword, Pageable pageable);
+
 }

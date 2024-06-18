@@ -1,5 +1,6 @@
 package com.example.cruiseroyalebe.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class Cabin {
     @JoinColumn(name = "cabin_type_id")
     private CabinType cabinType;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cruise_id")
     private Cruise cruise;

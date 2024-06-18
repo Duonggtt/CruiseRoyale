@@ -16,7 +16,7 @@ import javax.validation.Valid;
 public class TagController {
     public final TagService tagService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<?> getAllTags(@RequestParam(required = false, defaultValue = "id") String sortField,
                                            @RequestParam(required = false, defaultValue = "esc") String sortDirection,
                                            @RequestParam(required = false, defaultValue = "1") Integer page,
@@ -42,5 +42,10 @@ public class TagController {
     @DeleteMapping("/{id}")
     public void deleteTag(@PathVariable Integer id) {
         tagService.deleteTag(id);
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<?> getTags() {
+        return ResponseEntity.ok(tagService.getTags());
     }
 }

@@ -16,6 +16,8 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -64,22 +66,25 @@ public class BookingServiceImpl implements BookingService {
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        Cabin cabin = cabinRepository.findById(request.getCabinId())
-                .orElseThrow(() -> new RuntimeException("Cabin not found"));
+        List<Cabin> cabins = cabinRepository.findAllByIds(request.getCabinIds());
 
         Cruise cruise = cruiseRepository.findById(request.getCruiseId())
                 .orElseThrow(() -> new RuntimeException("Cruise not found"));
 
         Booking booking = new Booking();
         booking.setBookingDate(request.getBookingDate());
-        booking.setOrderDate(request.getOrderDate());
+        booking.setOrderDate(new Date());
         booking.setGuestQuantity(request.getGuestQuantity());
-        booking.setTotalPrice(cabin.getCabinType().getPrice().add(cruise.getPrice()));
+        BigDecimal price = BigDecimal.valueOf(0);
+        for(Cabin c : cabins){
+            price = price.add(c.getCabinType().getPrice());
+        }
+        booking.setTotalPrice(price);
         booking.setNote(request.getNote());
         booking.setBookingStatus(request.getBookingStatus());
         booking.setPaymentStatus(request.getPaymentStatus());
         booking.setUser(user);
-        booking.setCabin(cabin);
+        booking.setCabin(cabins);
         booking.setCruise(cruise);
         bookingRepository.save(booking);
         return booking;
@@ -90,8 +95,7 @@ public class BookingServiceImpl implements BookingService {
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        Cabin cabin = cabinRepository.findById(request.getCabinId())
-                .orElseThrow(() -> new RuntimeException("Cabin not found"));
+        List<Cabin> cabins = cabinRepository.findAllByIds(request.getCabinIds());
 
         Cruise cruise = cruiseRepository.findById(request.getCruiseId())
                 .orElseThrow(() -> new RuntimeException("Cruise not found"));
@@ -100,13 +104,18 @@ public class BookingServiceImpl implements BookingService {
                 .orElseThrow(() -> new RuntimeException("Booking not found with id " + id));
 
         booking.setBookingDate(request.getBookingDate());
-        booking.setOrderDate(request.getOrderDate());
+        booking.setOrderDate(booking.getOrderDate());
         booking.setGuestQuantity(request.getGuestQuantity());
-        booking.setTotalPrice(cabin.getCabinType().getPrice().add(cruise.getPrice()));        booking.setNote(request.getNote());
+        BigDecimal price = BigDecimal.valueOf(0);
+        for(Cabin c : cabins){
+            price = price.add(c.getCabinType().getPrice());
+        }
+        booking.setTotalPrice(price);
+        booking.setNote(request.getNote());
         booking.setBookingStatus(request.getBookingStatus());
         booking.setPaymentStatus(request.getPaymentStatus());
         booking.setUser(user);
-        booking.setCabin(cabin);
+        booking.setCabin(cabins);
         booking.setCruise(cruise);
         bookingRepository.save(booking);
         return booking;

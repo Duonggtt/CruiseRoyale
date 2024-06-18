@@ -3,6 +3,7 @@ package com.example.cruiseroyalebe.service;
 import com.example.cruiseroyalebe.entity.Cabin;
 import com.example.cruiseroyalebe.entity.CabinType;
 import com.example.cruiseroyalebe.modal.request.UpsertCabinRequest;
+import com.example.cruiseroyalebe.modal.respone.CabinResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 

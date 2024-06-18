@@ -4,6 +4,7 @@ import com.example.cruiseroyalebe.entity.Cabin;
 import com.example.cruiseroyalebe.entity.CabinType;
 import com.example.cruiseroyalebe.entity.Cruise;
 import com.example.cruiseroyalebe.modal.request.UpsertCabinRequest;
+import com.example.cruiseroyalebe.modal.respone.CabinResponse;
 import com.example.cruiseroyalebe.repository.CabinRepository;
 import com.example.cruiseroyalebe.repository.CabinTypeRepository;
 import com.example.cruiseroyalebe.repository.CruiseRepository;
@@ -96,7 +97,7 @@ public class CabinServiceImpl implements CabinService {
 
     @Override
     public List<Cabin> getAllCabinByCruiseId(Integer cruiseId) {
-        return cabinRepository.findAllByCruiseId(cruiseId);
+        return cabinRepository.findByCruiseIdWithCabinType(cruiseId);
     }
 
     @Override
