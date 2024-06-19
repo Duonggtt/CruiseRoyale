@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -26,6 +27,9 @@ public class CabinType {
     @Column(name = "room_size")
     private int roomSize;
 
+    @Column(name = "room_quantity")
+    private int roomQuantity;
+
     @Column(name = "max_guests")
     private int maxGuests;
 
@@ -34,5 +38,9 @@ public class CabinType {
 
     @ManyToMany(fetch = LAZY)
     private Collection<Tag> tags = new ArrayList<>();
+
+    @OneToMany
+    @JoinColumn(name = "cabin_type_image_id")
+    private List<CabinTypeImage> cabinTypeImages;
 
 }

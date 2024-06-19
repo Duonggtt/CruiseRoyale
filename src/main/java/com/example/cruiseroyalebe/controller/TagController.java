@@ -29,7 +29,7 @@ public class TagController {
         return new ResponseEntity<>(tagService.createTag(request), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> updateTag(@PathVariable Integer id,@Valid @RequestBody Tag request) {
         return new ResponseEntity<>(tagService.updateTag(id,request), HttpStatus.CREATED);
     }
@@ -42,6 +42,11 @@ public class TagController {
     @DeleteMapping("/{id}")
     public void deleteTag(@PathVariable Integer id) {
         tagService.deleteTag(id);
+    }
+
+    @GetMapping("/auth/")
+    public ResponseEntity<?> getTagsAuth() {
+        return ResponseEntity.ok(tagService.getTags());
     }
 
     @GetMapping("/")

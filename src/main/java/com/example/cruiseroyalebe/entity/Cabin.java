@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,4 +26,5 @@ public class Cabin {
     @ManyToOne
     @JoinColumn(name = "cruise_id")
     private Cruise cruise;
+
 }

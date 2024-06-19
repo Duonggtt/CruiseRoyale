@@ -51,6 +51,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public Tag createTag(Tag request) {
         Tag tag = new Tag();
+        tag.setIcon(request.getIcon());
         tag.setName(request.getName());
         tagRepository.save(tag);
         return tag;
@@ -61,6 +62,7 @@ public class TagServiceImpl implements TagService {
         Tag tag = tagRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Tag not found with id = " + id));
 
+        tag.setIcon(request.getIcon());
         tag.setName(request.getName());
         tagRepository.save(tag);
         return tag;

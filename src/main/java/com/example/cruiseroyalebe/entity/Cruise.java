@@ -29,6 +29,7 @@ public class Cruise {
     private Integer id;
 
     private String name;
+
     @Column(name = "lauched_year")
     private int launchedYear;
 
@@ -36,8 +37,18 @@ public class Cruise {
     private int cabinQuantity;
 
     private String material;
+
+    @ElementCollection
+    @CollectionTable(name = "cruise_short_descs", joinColumns = @JoinColumn(name = "cruise_id"))
+    @Column(name = "short_desc")
+    private List<String> shortDesc = new ArrayList<>();
+
     private String description;
     private BigDecimal price;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "section_id")
+    private List<CruiseDetailSection> sections;
 
     @Column(name = "owned_date")
     private Date ownedDate;

@@ -28,9 +28,6 @@ public class CabinTypeImage {
     @Column(name = "created_at", columnDefinition = "TIMESTAMP")
     private Date createdAt;
 
-    @ManyToOne()
-    @JoinColumn(name = "cabin_type_id")
-    private CabinType cabinType;
 
     @PrePersist
     public void prePersist() {

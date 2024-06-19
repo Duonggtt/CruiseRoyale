@@ -15,5 +15,7 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String icon;
+
     private String name;
 }

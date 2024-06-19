@@ -27,6 +27,9 @@ public interface CabinRepository extends JpaRepository<Cabin, Integer> {
     @Query("SELECT c FROM Cabin c JOIN FETCH c.cabinType WHERE c.cruise.id = ?1")
     List<Cabin> findByCruiseIdWithCabinType(Integer cruiseId);
 
+    @Query("SELECT c FROM Cabin c JOIN FETCH c.cabinType ct LEFT JOIN FETCH ct.cabinTypeImages WHERE c.cruise.id = ?1")
+    List<Cabin> findByCruiseIdWithCabinTypeAndImages(Integer cruiseId);
+
     @Query("select c from Cabin c where c.id in ?1")
     List<Cabin> findAllByIds(List<Integer> ids);
 }

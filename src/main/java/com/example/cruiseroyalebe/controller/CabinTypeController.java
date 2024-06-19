@@ -32,7 +32,7 @@ public class CabinTypeController {
         return new ResponseEntity<>(cabinTypeService.createCabinType(request), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> updateCabinType(@PathVariable Integer id,@Valid @RequestBody UpsertCabinTypeRequest request) {
         return new ResponseEntity<>(cabinTypeService.updateCabinType(id,request), HttpStatus.CREATED);
     }

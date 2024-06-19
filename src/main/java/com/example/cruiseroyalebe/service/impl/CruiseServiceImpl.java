@@ -87,6 +87,7 @@ public class CruiseServiceImpl implements CruiseService {
         cruise.setArrivalTime(request.getArrivalTime());
         cruise.setRules(rules);
         cruise.setTags(tags);
+        cruise.setShortDesc(request.getShortDesc());
         cruise.setOwner(owner);
         cruise.setLocation(location);
         cruiseRepository.save(cruise);
@@ -119,6 +120,7 @@ public class CruiseServiceImpl implements CruiseService {
         cruise.setRules(rules);
         cruise.setTags(tags);
         cruise.setOwner(owner);
+        cruise.setShortDesc(request.getShortDesc());
         cruise.setLocation(location);
         cruiseRepository.save(cruise);
         return cruise;

@@ -97,7 +97,7 @@ public class CabinServiceImpl implements CabinService {
 
     @Override
     public List<Cabin> getAllCabinByCruiseId(Integer cruiseId) {
-        return cabinRepository.findByCruiseIdWithCabinType(cruiseId);
+        return cabinRepository.findByCruiseIdWithCabinTypeAndImages(cruiseId);
     }
 
     @Override

@@ -20,6 +20,7 @@ public class UpsertCruiseRequest {
     private String description;
     private BigDecimal price;
     private Date ownedDate;
+    List<String> shortDesc;
     private LocalTime departureTime;
     private LocalTime arrivalTime;
     private Integer locationId;
