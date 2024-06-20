@@ -22,7 +22,7 @@ public interface CruiseService {
     void deleteCruise(Integer id);
     List<CruiseDto> getCruises();
     List<Cruise> findCruisesByPriceRange(int priceRange);
-
+    Cruise getCruiseDetailById(Integer id);
     List<CruiseDto> getSomeFeaturedCruise();
     List<Cruise> getCruisesByLocationId(Integer locationId);
     List<Cruise> getCruisesByNameLike(String name);

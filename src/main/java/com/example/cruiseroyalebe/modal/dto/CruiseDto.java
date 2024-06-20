@@ -36,6 +36,7 @@ public class CruiseDto {
     private LocalTime departureTime;
     private LocalTime arrivalTime;
     private List<Integer> ruleIds;
+    private List<Integer> cruiseDtSectionIds;
     private List<Integer> tagIds;
     private Integer locationId;
     private Integer ownerId;

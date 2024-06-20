@@ -40,7 +40,7 @@ public class CabinType {
     private Collection<Tag> tags = new ArrayList<>();
 
     @OneToMany
-    @JoinColumn(name = "cabin_type_image_id")
+    @JoinColumn(name = "cabin_type_id")
     private List<CabinTypeImage> cabinTypeImages;
 
 }

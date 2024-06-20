@@ -46,9 +46,9 @@ public class Cruise {
     private String description;
     private BigDecimal price;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "section_id")
-    private List<CruiseDetailSection> sections;
+    @OneToMany(fetch = LAZY)
+    @JoinColumn(name = "cruise_id")
+    private List<CruiseDetailSection> sections = new ArrayList<>();
 
     @Column(name = "owned_date")
     private Date ownedDate;

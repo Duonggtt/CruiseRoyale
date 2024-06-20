@@ -52,6 +52,11 @@ public class CruiseController {
         return ResponseEntity.ok(cruiseService.getCruiseById(id));
     }
 
+//    @GetMapping("/test/{id}")
+//    public ResponseEntity<?> getCruiseDetailById(@PathVariable Integer id) {
+//        return ResponseEntity.ok(cruiseService.getCruiseDetailById(id));
+//    }
+
     @GetMapping("/auth/{id}")
     public ResponseEntity<?> getCruiseByIdAuth(@PathVariable Integer id) {
         return ResponseEntity.ok(cruiseService.getCruiseById(id));

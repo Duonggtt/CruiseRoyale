@@ -3,6 +3,7 @@ package com.example.cruiseroyalebe.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,10 +20,8 @@ public class CruiseDetailSection {
     @Column(columnDefinition = "TEXT")
     private String text;
 
-    @Lob
-    @Column(nullable = true)
-    private byte[] image;
+    @OneToMany
+    @JoinColumn(name = "cruise_detail_section_id")
+    private List<CruiseDtSectionImage> cruiseDtSectionImages;
 
-    @Column(nullable = true)
-    private String imageFileName;
 }

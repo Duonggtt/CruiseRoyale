@@ -1,11 +1,13 @@
 package com.example.cruiseroyalebe.repository;
 
+import com.example.cruiseroyalebe.entity.Cabin;
 import com.example.cruiseroyalebe.entity.Cruise;
 import com.example.cruiseroyalebe.entity.Location;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -27,6 +29,11 @@ public interface CruiseRepository extends JpaRepository<Cruise, Integer> {
 
     @Query(value = "SELECT c.* FROM cruise c JOIN (SELECT cruise_id, COUNT(*) as booking_count FROM booking GROUP BY cruise_id ORDER BY booking_count DESC LIMIT 6) b ON c.id = b.cruise_id", nativeQuery = true)
     List<Cruise> getSomeFeaturedCruise();
+
+    @Query("SELECT DISTINCT c FROM Cruise c "
+            + "LEFT JOIN FETCH c.sections s "
+            + "LEFT JOIN FETCH s.cruiseDtSectionImages i")
+    Cruise findByIdWithSectionsAndImages(@Param("id") Integer id);
 
     List<Cruise> findAllByLocation_Id(Integer locationId);
 
