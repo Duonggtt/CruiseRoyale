@@ -30,10 +30,9 @@ public interface CruiseRepository extends JpaRepository<Cruise, Integer> {
     @Query(value = "SELECT c.* FROM cruise c JOIN (SELECT cruise_id, COUNT(*) as booking_count FROM booking GROUP BY cruise_id ORDER BY booking_count DESC LIMIT 6) b ON c.id = b.cruise_id", nativeQuery = true)
     List<Cruise> getSomeFeaturedCruise();
 
-    @Query("SELECT DISTINCT c FROM Cruise c "
-            + "LEFT JOIN FETCH c.sections s "
-            + "LEFT JOIN FETCH s.cruiseDtSectionImages i")
-    Cruise findByIdWithSectionsAndImages(@Param("id") Integer id);
+
+    @Query("SELECT c FROM Cruise c WHERE c.id = ?1")
+    Cruise findByIdWithSectionsAndSectionImages(Integer id);
 
     List<Cruise> findAllByLocation_Id(Integer locationId);
 

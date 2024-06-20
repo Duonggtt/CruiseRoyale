@@ -143,7 +143,7 @@ public class CruiseServiceImpl implements CruiseService {
 
     @Override
     public Cruise getCruiseDetailById(Integer id) {
-        return cruiseRepository.findByIdWithSectionsAndImages(id);
+        return cruiseRepository.findByIdWithSectionsAndSectionImages(id);
     }
 
     @Override
