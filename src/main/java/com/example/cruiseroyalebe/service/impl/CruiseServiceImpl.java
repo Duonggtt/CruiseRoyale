@@ -200,17 +200,9 @@ public class CruiseServiceImpl implements CruiseService {
         cruiseDto.setLaunchedYear(cruise.getLaunchedYear());
         cruiseDto.setCabinQuantity(cruise.getCabinQuantity());
         cruiseDto.setMaterial(cruise.getMaterial());
-        cruiseDto.setDescription(cruise.getDescription());
         cruiseDto.setPrice(cruise.getPrice());
-        cruiseDto.setOwnedDate(cruise.getOwnedDate());
         cruiseDto.setDepartureTime(cruise.getDepartureTime());
         cruiseDto.setArrivalTime(cruise.getArrivalTime());
-
-        // Map ruleIds
-        List<Integer> ruleIds = cruise.getRules().stream()
-                .map(Rule::getId)
-                .collect(Collectors.toList());
-        cruiseDto.setRuleIds(ruleIds);
 
         // Map tagIds
         List<Integer> tagIds = cruise.getTags().stream()
@@ -221,8 +213,6 @@ public class CruiseServiceImpl implements CruiseService {
         // Set locationId
         cruiseDto.setLocationId(cruise.getLocation().getId());
 
-        // Set ownerId
-        cruiseDto.setOwnerId(cruise.getOwner().getId());
 
         // Map imageIds
         List<CruiseImage> cruiseImages = cruiseImageRepository.findAllByCruiseId(cruise.getId());
