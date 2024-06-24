@@ -3,7 +3,10 @@ package com.example.cruiseroyalebe.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+
+import static javax.persistence.FetchType.LAZY;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +22,10 @@ public class CruiseDetailSection {
 
     @Column(columnDefinition = "TEXT")
     private String text;
+
+    @ManyToOne
+    @JoinColumn(name = "cruise_id")
+    private Cruise cruise;
 
     @OneToMany
     @JoinColumn(name = "cruise_detail_section_id")

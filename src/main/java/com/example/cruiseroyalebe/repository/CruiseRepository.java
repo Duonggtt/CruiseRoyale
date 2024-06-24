@@ -31,9 +31,6 @@ public interface CruiseRepository extends JpaRepository<Cruise, Integer> {
     List<Cruise> getSomeFeaturedCruise();
 
 
-    @Query("SELECT c FROM Cruise c WHERE c.id = ?1")
-    Cruise findByIdWithSectionsAndSectionImages(Integer id);
-
     List<Cruise> findAllByLocation_Id(Integer locationId);
 
     @Query("Select c from Cruise c where c.name like %?1%")

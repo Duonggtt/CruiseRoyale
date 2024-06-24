@@ -1,9 +1,9 @@
-package com.example.cruiseroyalebe.modal.request;
+package com.example.cruiseroyalebe.modal.dto;
 
 import com.example.cruiseroyalebe.entity.CruiseDtSectionImage;
 import lombok.*;
 
-import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Getter
@@ -11,10 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UpsertCruiseDetailSection {
-
+public class SectionsDto {
     private String text;
     private Integer cruiseId;
-    private List<Integer> cruiseDtSectionImageIds;
-
+    private Collection<CruiseDtSectionImage> cruiseDtSectionImages;
 }

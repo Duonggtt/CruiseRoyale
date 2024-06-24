@@ -24,7 +24,6 @@ public class UpsertCruiseRequest {
     private LocalTime departureTime;
     private LocalTime arrivalTime;
     private Integer locationId;
-    private List<Integer> cruiseDtSectionIds;
     private List<Integer> ruleIds;
     private List<Integer> tagIds;
     private Integer ownerId;

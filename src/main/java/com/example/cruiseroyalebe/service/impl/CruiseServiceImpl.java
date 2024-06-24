@@ -78,8 +78,6 @@ public class CruiseServiceImpl implements CruiseService {
         Location location = locationRepository.findById(request.getLocationId())
                 .orElseThrow(() -> new NotFoundException("location not found with id= " + request.getLocationId()));
 
-        List<CruiseDetailSection> sections = cruiseDetailSectionRepository.findAllById(request.getCruiseDtSectionIds());
-
         Cruise cruise = new Cruise();
         cruise.setName(request.getName());
         cruise.setLaunchedYear(request.getLaunchedYear());
@@ -92,7 +90,6 @@ public class CruiseServiceImpl implements CruiseService {
         cruise.setArrivalTime(request.getArrivalTime());
         cruise.setRules(rules);
         cruise.setTags(tags);
-        cruise.setSections(sections);
         cruise.setShortDesc(request.getShortDesc());
         cruise.setOwner(owner);
         cruise.setLocation(location);
@@ -114,8 +111,6 @@ public class CruiseServiceImpl implements CruiseService {
         Cruise cruise = cruiseRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Cruise not found with id= " + id));
 
-        List<CruiseDetailSection> sections = cruiseDetailSectionRepository.findAllById(request.getCruiseDtSectionIds());
-
         cruise.setName(request.getName());
         cruise.setLaunchedYear(request.getLaunchedYear());
         cruise.setCabinQuantity(request.getCabinQuantity());
@@ -127,7 +122,6 @@ public class CruiseServiceImpl implements CruiseService {
         cruise.setArrivalTime(request.getArrivalTime());
         cruise.setRules(rules);
         cruise.setTags(tags);
-        cruise.setSections(sections);
         cruise.setOwner(owner);
         cruise.setShortDesc(request.getShortDesc());
         cruise.setLocation(location);
@@ -139,11 +133,6 @@ public class CruiseServiceImpl implements CruiseService {
     public Cruise getCruiseById(Integer id) {
         return cruiseRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Cruise not found with id= " + id));
-    }
-
-    @Override
-    public Cruise getCruiseDetailById(Integer id) {
-        return cruiseRepository.findByIdWithSectionsAndSectionImages(id);
     }
 
     @Override
