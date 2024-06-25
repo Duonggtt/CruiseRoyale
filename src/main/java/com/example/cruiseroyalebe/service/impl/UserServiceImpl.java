@@ -1,5 +1,6 @@
 package com.example.cruiseroyalebe.service.impl;
 
+import com.example.cruiseroyalebe.entity.Booking;
 import com.example.cruiseroyalebe.entity.Role;
 import com.example.cruiseroyalebe.entity.User;
 import com.example.cruiseroyalebe.exception.NotFoundException;
@@ -8,6 +9,7 @@ import com.example.cruiseroyalebe.modal.request.CreateUserRequest;
 import com.example.cruiseroyalebe.modal.request.RegisterRequest;
 import com.example.cruiseroyalebe.modal.request.UpdateUserRequest;
 import com.example.cruiseroyalebe.modal.respone.UserResponse;
+import com.example.cruiseroyalebe.repository.BookingRepository;
 import com.example.cruiseroyalebe.repository.RoleRepository;
 import com.example.cruiseroyalebe.repository.UserRepository;
 import com.example.cruiseroyalebe.service.UserService;
@@ -36,6 +38,8 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final BookingRepository bookingRepository;
+
 
     @Override
     public User saveUser(User user) {
@@ -124,6 +128,10 @@ public class UserServiceImpl implements UserService,UserDetailsService {
 
     @Override
     public void removeUserById(Integer id) {
+        boolean bookingExist = bookingRepository.existsByUserId(id);
+        if(bookingExist) {
+            throw new IllegalArgumentException("User by id " + id + " has booking");
+        }
         userRepository.deleteById(id);
     }
 

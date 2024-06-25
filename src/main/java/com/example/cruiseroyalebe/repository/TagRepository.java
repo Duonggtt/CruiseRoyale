@@ -20,4 +20,5 @@ public interface TagRepository extends JpaRepository<Tag, Integer> {
     Page<Tag> findAll(String keyword, Pageable pageable);
 
     List<Tag> findAll();
+
 }

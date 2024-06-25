@@ -29,6 +29,10 @@ public class CruiseServiceImpl implements CruiseService {
     private final CruiseImageRepository cruiseImageRepository;
     private final ReviewRepository reviewRepository;
     private final CruiseDetailSectionRepository cruiseDetailSectionRepository;
+    private final BookingRepository bookingRepository;
+    private final CabinRepository cabinRepository;
+    private final CabinTypeImageRepository cabinTypeImageRepository;
+    private final CruiseDtSectionImageRepository cruiseDtSectionImageRepository;
 
 
     @Override
@@ -136,9 +140,45 @@ public class CruiseServiceImpl implements CruiseService {
     }
 
     @Override
+    @Transactional
     public void deleteCruise(Integer id) {
+        // Kiểm tra xem có booking nào cho du thuyền này không
+        Booking bookingExist = bookingRepository.findByCruiseId(id);
+        if(bookingExist != null) {
+            throw new IllegalArgumentException("Du thuyen da duoc dat, khong the xoa!");
+        }
+
+        // Lấy cruise từ database
         Cruise cruise = cruiseRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Cruise not found with id= " + id));
+
+        // Xóa các cabin và cabin type images liên quan
+        List<Cabin> cabins = cabinRepository.findByCruiseId(id);
+        for (Cabin cabin : cabins) {
+            cabinTypeImageRepository.deleteByIdIn(cabin.getCabinType().getCabinTypeImages().stream()
+                    .map(CabinTypeImage::getId)
+                    .collect(Collectors.toList()));
+        }
+        cabinRepository.deleteByCruiseId(id);
+
+        // Xóa cruise detail sections và images
+        List<CruiseDetailSection> cruiseDetailSections = cruiseDetailSectionRepository.findByCruiseId(id);
+        for (CruiseDetailSection section : cruiseDetailSections) {
+            List<Integer> imageIds = section.getCruiseDtSectionImages().stream()
+                    .map(CruiseDtSectionImage::getId)
+                    .collect(Collectors.toList());
+            cruiseDtSectionImageRepository.deleteByIdIn(imageIds);
+        }
+        cruiseDetailSectionRepository.deleteByCruiseId(id);
+
+        // Xóa cruise images
+        cruiseImageRepository.deleteByCruiseId(id);
+
+        // Xóa các liên kết trong các collection
+        cruise.getRules().clear();
+        cruise.getTags().clear();
+
+        // Cuối cùng, xóa cruise
         cruiseRepository.delete(cruise);
     }
 

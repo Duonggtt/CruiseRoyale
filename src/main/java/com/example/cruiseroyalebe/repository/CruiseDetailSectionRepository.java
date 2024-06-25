@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface CruiseDetailSectionRepository extends JpaRepository<CruiseDetailSection, Integer>{
     List<CruiseDetailSection> findByCruiseId(Integer cruiseId);
+    void deleteByCruiseId(Integer cruiseId);
 }

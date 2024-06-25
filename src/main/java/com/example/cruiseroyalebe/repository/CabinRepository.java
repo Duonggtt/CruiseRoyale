@@ -32,4 +32,7 @@ public interface CabinRepository extends JpaRepository<Cabin, Integer> {
 
     @Query("select c from Cabin c where c.id in ?1")
     List<Cabin> findAllByIds(List<Integer> ids);
+
+    List<Cabin> findByCruiseId(Integer cruiseId);
+    void deleteByCruiseId(Integer cruiseId);
 }
