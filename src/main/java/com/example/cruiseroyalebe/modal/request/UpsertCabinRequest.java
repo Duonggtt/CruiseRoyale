@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class UpsertCabinRequest {
+    private int roomQuantity;
     private Integer cabinTypeId;
     private Integer cruiseId;
 }

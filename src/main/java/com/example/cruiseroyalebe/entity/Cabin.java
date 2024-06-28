@@ -18,6 +18,12 @@ public class Cabin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "room_quantity")
+    private int roomQuantity;
+
+    @Column(name = "available_rooms")
+    private int availableRooms;
+
     @ManyToOne
     @JoinColumn(name = "cabin_type_id")
     private CabinType cabinType;

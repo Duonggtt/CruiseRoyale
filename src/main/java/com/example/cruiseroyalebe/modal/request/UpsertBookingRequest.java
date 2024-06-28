@@ -5,6 +5,7 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -14,10 +15,10 @@ import java.util.List;
 public class UpsertBookingRequest {
     private Date bookingDate;
     private int guestQuantity;
+    private Map<Integer, Integer> cabinBookings;
     private String note;
     private Boolean bookingStatus;
     private Boolean paymentStatus;
     private Integer userId;
-    private List<Integer> cabinIds;
     private Integer cruiseId;
 }

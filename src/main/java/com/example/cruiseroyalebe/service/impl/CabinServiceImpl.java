@@ -66,6 +66,7 @@ public class CabinServiceImpl implements CabinService {
                 .orElseThrow(() -> new RuntimeException("Cruise not found"));
 
         Cabin cabin = new Cabin();
+        cabin.setRoomQuantity(request.getRoomQuantity());
         cabin.setCabinType(cabinType);
         cabin.setCruise(cruise);
         cabinRepository.save(cabin);
@@ -83,6 +84,7 @@ public class CabinServiceImpl implements CabinService {
         Cabin cabin = cabinRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cabin not found with id= " + id));
 
+        cabin.setRoomQuantity(request.getRoomQuantity());
         cabin.setCabinType(cabinType);
         cabin.setCruise(cruise);
         cabinRepository.save(cabin);

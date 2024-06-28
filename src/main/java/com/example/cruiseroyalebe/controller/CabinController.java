@@ -32,6 +32,11 @@ public class CabinController {
         return new ResponseEntity<>(cabinService.createCabin(request), HttpStatus.CREATED);
     }
 
+    @GetMapping("/auth")
+    public ResponseEntity<?> getCabinsAuth() {
+        return ResponseEntity.ok(cabinService.getCabins());
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<?> updateCabin(@PathVariable Integer id,@Valid @RequestBody UpsertCabinRequest request) {
         return new ResponseEntity<>(cabinService.updateCabin(id,request), HttpStatus.CREATED);

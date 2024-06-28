@@ -22,7 +22,6 @@ public class UpsertCabinTypeRequest {
     private int roomSize;
     private int maxGuests;
     private String description;
-    private int roomQuantity;
     private BigDecimal price;
     private List<Integer> cabinTypeImageIds;
     private Collection<Integer> tagIds;

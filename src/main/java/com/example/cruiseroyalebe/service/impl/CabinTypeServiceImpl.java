@@ -69,7 +69,6 @@ public class CabinTypeServiceImpl implements CabinTypeService {
         cabinType.setRoomSize(request.getRoomSize());
         cabinType.setMaxGuests(request.getMaxGuests());
         cabinType.setDescription(request.getDescription());
-        cabinType.setRoomQuantity(request.getRoomQuantity());
         cabinType.setCabinTypeImages(cabinTypeImages);
         cabinType.setPrice(request.getPrice());
         cabinType.setTags(tags);
@@ -90,7 +89,6 @@ public class CabinTypeServiceImpl implements CabinTypeService {
         cabinType.setRoomSize(request.getRoomSize());
         cabinType.setMaxGuests(request.getMaxGuests());
         cabinType.setDescription(request.getDescription());
-        cabinType.setRoomQuantity(request.getRoomQuantity());
         cabinType.setCabinTypeImages(cabinTypeImages);
         cabinType.setPrice(request.getPrice());
         cabinType.setTags(tags);

@@ -17,8 +17,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -62,12 +64,8 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking createBooking(UpsertBookingRequest request) {
-
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
-
-        List<Cabin> cabins = cabinRepository.findAllByIds(request.getCabinIds());
-
         Cruise cruise = cruiseRepository.findById(request.getCruiseId())
                 .orElseThrow(() -> new RuntimeException("Cruise not found"));
 
@@ -75,50 +73,109 @@ public class BookingServiceImpl implements BookingService {
         booking.setBookingDate(request.getBookingDate());
         booking.setOrderDate(new Date());
         booking.setGuestQuantity(request.getGuestQuantity());
-        BigDecimal price = BigDecimal.valueOf(0);
-        for(Cabin c : cabins){
-            price = price.add(c.getCabinType().getPrice());
+
+        List<Cabin> bookedCabins = new ArrayList<>();
+        BigDecimal totalPrice = BigDecimal.ZERO;
+
+        for (Map.Entry<Integer, Integer> entry : request.getCabinBookings().entrySet()) {
+            Integer cabinId = entry.getKey();
+            Integer roomsToBook = entry.getValue();
+
+            Cabin cabin = cabinRepository.findById(cabinId)
+                    .orElseThrow(() -> new RuntimeException("Cabin not found"));
+
+            if (cabin.getAvailableRooms() < roomsToBook) {
+                throw new RuntimeException("Not enough rooms for cabin " + cabinId);
+            }
+
+            cabin.setAvailableRooms(cabin.getAvailableRooms() - roomsToBook);
+            cabinRepository.save(cabin);
+
+            for (int i = 0; i < roomsToBook; i++) {
+                bookedCabins.add(cabin);
+            }
+
+            totalPrice = totalPrice.add(cabin.getCabinType().getPrice().multiply(BigDecimal.valueOf(roomsToBook)));
         }
-        booking.setTotalPrice(price);
+
+        booking.setTotalPrice(totalPrice);
         booking.setNote(request.getNote());
         booking.setBookingStatus(request.getBookingStatus());
         booking.setPaymentStatus(request.getPaymentStatus());
         booking.setUser(user);
-        booking.setCabin(cabins);
+        booking.setCabin(bookedCabins);
         booking.setCruise(cruise);
-        bookingRepository.save(booking);
-        return booking;
+
+        return bookingRepository.save(booking);
     }
 
     @Override
     public Booking updateBooking(Integer id, UpsertBookingRequest request) {
+        Booking existingBooking = bookingRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
-
-        List<Cabin> cabins = cabinRepository.findAllByIds(request.getCabinIds());
-
         Cruise cruise = cruiseRepository.findById(request.getCruiseId())
                 .orElseThrow(() -> new RuntimeException("Cruise not found"));
 
-        Booking booking = bookingRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Booking not found with id " + id));
-
-        booking.setBookingDate(request.getBookingDate());
-        booking.setOrderDate(booking.getOrderDate());
-        booking.setGuestQuantity(request.getGuestQuantity());
-        BigDecimal price = BigDecimal.valueOf(0);
-        for(Cabin c : cabins){
-            price = price.add(c.getCabinType().getPrice());
+        // Trả lại phòng đã đặt trước đó
+        for (Cabin cabin : existingBooking.getCabin()) {
+            cabin.setAvailableRooms(cabin.getAvailableRooms() + 1);
+            cabinRepository.save(cabin);
         }
-        booking.setTotalPrice(price);
-        booking.setNote(request.getNote());
-        booking.setBookingStatus(request.getBookingStatus());
-        booking.setPaymentStatus(request.getPaymentStatus());
-        booking.setUser(user);
-        booking.setCabin(cabins);
-        booking.setCruise(cruise);
+
+        List<Cabin> bookedCabins = new ArrayList<>();
+        BigDecimal totalPrice = BigDecimal.ZERO;
+
+        // Đặt phòng mới
+        for (Map.Entry<Integer, Integer> entry : request.getCabinBookings().entrySet()) {
+            Integer cabinId = entry.getKey();
+            Integer roomsToBook = entry.getValue();
+
+            Cabin cabin = cabinRepository.findById(cabinId)
+                    .orElseThrow(() -> new RuntimeException("Cabin not found"));
+
+            if (cabin.getAvailableRooms() < roomsToBook) {
+                throw new RuntimeException("Not enough rooms for cabin " + cabinId);
+            }
+
+            cabin.setAvailableRooms(cabin.getAvailableRooms() - roomsToBook);
+            cabinRepository.save(cabin);
+
+            for (int i = 0; i < roomsToBook; i++) {
+                bookedCabins.add(cabin);
+            }
+
+            totalPrice = totalPrice.add(cabin.getCabinType().getPrice().multiply(BigDecimal.valueOf(roomsToBook)));
+        }
+
+        existingBooking.setBookingDate(request.getBookingDate());
+        existingBooking.setGuestQuantity(request.getGuestQuantity());
+        existingBooking.setTotalPrice(totalPrice);
+        existingBooking.setNote(request.getNote());
+        existingBooking.setBookingStatus(request.getBookingStatus());
+        existingBooking.setPaymentStatus(request.getPaymentStatus());
+        existingBooking.setUser(user);
+        existingBooking.setCabin(bookedCabins);
+        existingBooking.setCruise(cruise);
+
+        return bookingRepository.save(existingBooking);
+    }
+
+    @Override
+    public Boolean returnBooking(Integer bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+
+        for (Cabin cabin : booking.getCabin()) {
+            cabin.setAvailableRooms(cabin.getAvailableRooms() + 1);
+            cabinRepository.save(cabin);
+        }
+
+        booking.setBookingStatus(false);
         bookingRepository.save(booking);
-        return booking;
+        return true;
     }
 
     @Override

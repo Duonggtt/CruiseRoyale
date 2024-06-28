@@ -27,9 +27,6 @@ public class CabinType {
     @Column(name = "room_size")
     private int roomSize;
 
-    @Column(name = "room_quantity")
-    private int roomQuantity;
-
     @Column(name = "max_guests")
     private int maxGuests;
 

@@ -31,9 +31,14 @@ public class BookingController {
         return new ResponseEntity<>(bookingService.createBooking(request), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> updateBooking(@PathVariable Integer id,@Valid @RequestBody UpsertBookingRequest request) {
         return new ResponseEntity<>(bookingService.updateBooking(id,request), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/check-out/{id}")
+    public ResponseEntity<?> checkOutBooking(@PathVariable Integer id) {
+        return new ResponseEntity<>(bookingService.returnBooking(id), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

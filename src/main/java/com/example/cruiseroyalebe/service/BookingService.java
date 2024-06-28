@@ -18,4 +18,5 @@ public interface BookingService {
     Booking getBookingById(Integer id);
     void deleteBooking(Integer id);
     List<Booking> getBookings();
+    Boolean returnBooking(Integer bookingId);
 }
