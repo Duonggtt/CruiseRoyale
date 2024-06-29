@@ -107,6 +107,11 @@ public class CabinServiceImpl implements CabinService {
     public void deleteCabin(Integer id) {
         Cabin cabin = cabinRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cabin not found with id= " + id));
+        if(cabin.getAvailableRooms() != cabin.getRoomQuantity()){
+            throw new RuntimeException("Cabin cannot be deleted as it has bookings");
+        }
+        CabinType cabinType = cabin.getCabinType();
+        cabinTypeRepository.delete(cabinType);
         cabinRepository.delete(cabin);
     }
 

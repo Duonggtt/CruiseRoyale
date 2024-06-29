@@ -64,6 +64,9 @@ public class CabinTypeServiceImpl implements CabinTypeService {
 
         List<CabinTypeImage> cabinTypeImages = cabinTypeImageRepository.findAllById(request.getCabinTypeImageIds());
 
+        if(cabinTypeRepository.findByName(request.getName()) != null){
+            throw new RuntimeException("CabinType already exists with name= " + request.getName());
+        }
         CabinType cabinType = new CabinType();
         cabinType.setName(request.getName());
         cabinType.setRoomSize(request.getRoomSize());
@@ -84,7 +87,9 @@ public class CabinTypeServiceImpl implements CabinTypeService {
                 .orElseThrow(() -> new RuntimeException("CabinType not found with id= " + id));
 
         List<CabinTypeImage> cabinTypeImages = cabinTypeImageRepository.findAllById(request.getCabinTypeImageIds());
-
+        if(cabinTypeRepository.findByName(request.getName()) != null){
+            throw new RuntimeException("CabinType already exists with name= " + request.getName());
+        }
         cabinType.setName(request.getName());
         cabinType.setRoomSize(request.getRoomSize());
         cabinType.setMaxGuests(request.getMaxGuests());
