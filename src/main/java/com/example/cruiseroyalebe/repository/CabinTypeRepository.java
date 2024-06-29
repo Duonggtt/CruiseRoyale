@@ -20,4 +20,6 @@ public interface CabinTypeRepository extends JpaRepository<CabinType, Integer> {
             + "concat(c.id, c.name)"
             + "LIKE %?1%")
     Page<CabinType> findAll(String keyword, Pageable pageable);
+
+    CabinType findByName(String name);
 }

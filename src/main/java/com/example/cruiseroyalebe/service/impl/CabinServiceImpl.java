@@ -67,6 +67,7 @@ public class CabinServiceImpl implements CabinService {
 
         Cabin cabin = new Cabin();
         cabin.setRoomQuantity(request.getRoomQuantity());
+        cabin.setAvailableRooms(request.getRoomQuantity());
         cabin.setCabinType(cabinType);
         cabin.setCruise(cruise);
         cabinRepository.save(cabin);

@@ -28,7 +28,7 @@ public class CabinTypeController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createCabinType(@Valid @RequestBody UpsertCabinTypeRequest request) {
+    public ResponseEntity<CabinType> createCabinType(@Valid @RequestBody UpsertCabinTypeRequest request) {
         return new ResponseEntity<>(cabinTypeService.createCabinType(request), HttpStatus.CREATED);
     }
 
@@ -40,6 +40,11 @@ public class CabinTypeController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getCabinTypeById(@PathVariable Integer id) {
         return ResponseEntity.ok(cabinTypeService.getCabinTypeById(id));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> getCabinTypeByName(@RequestParam String name) {
+        return ResponseEntity.ok(cabinTypeService.getCabinTypeByName(name));
     }
 
     @DeleteMapping("/{id}")

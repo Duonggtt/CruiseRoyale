@@ -52,7 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/api/locations/{id}","/api/locations/",
                 "/api/cabins",
                 "/api/tags/",
-                "/api/sections/by-cruise"
+                "/api/sections/by-cruise",
+                "/api/v1/get-status","/api/v1/callback","/api/v1/create-order"
         ).permitAll();
         http.authorizeRequests().antMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
         http.authorizeRequests().antMatchers(POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");

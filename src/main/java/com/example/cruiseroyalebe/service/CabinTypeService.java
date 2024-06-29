@@ -17,4 +17,5 @@ public interface CabinTypeService {
     CabinType getCabinTypeById(Integer id);
     void deleteCabinType(Integer id);
     List<CabinType> getCabinTypes();
+    CabinType getCabinTypeByName(String name);
 }

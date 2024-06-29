@@ -103,6 +103,11 @@ public class CabinTypeServiceImpl implements CabinTypeService {
     }
 
     @Override
+    public CabinType getCabinTypeByName(String name) {
+        return cabinTypeRepository.findByName(name);
+    }
+
+    @Override
     public void deleteCabinType(Integer id) {
         CabinType cabinType = cabinTypeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("CabinType not found with id= " + id));
