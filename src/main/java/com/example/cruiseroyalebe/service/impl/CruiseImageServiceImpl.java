@@ -5,6 +5,7 @@ import com.example.cruiseroyalebe.entity.CruiseImage;
 import com.example.cruiseroyalebe.entity.User;
 import com.example.cruiseroyalebe.entity.UserImage;
 import com.example.cruiseroyalebe.exception.NotFoundException;
+import com.example.cruiseroyalebe.modal.dto.CruiseImageDto;
 import com.example.cruiseroyalebe.repository.CruiseImageRepository;
 import com.example.cruiseroyalebe.repository.CruiseRepository;
 import com.example.cruiseroyalebe.service.CruiseImageService;
@@ -27,6 +28,21 @@ public class CruiseImageServiceImpl implements CruiseImageService {
 
     public List<CruiseImage> getFilesOfCurrentCruise(Integer cruiseId) {
         return cruiseImageRepository.findByCruise_IdOrderByCreatedAtDesc(cruiseId);
+    }
+
+    public List<CruiseImageDto> getAllImageByCruiseId(Integer cruiseId) {
+        return cruiseImageRepository.findAllByCruiseIdOrderByCreatedAtDesc(cruiseId).stream()
+                .map(this::convertToDto)
+                .toList();
+    }
+
+    public CruiseImageDto convertToDto(CruiseImage image) {
+        CruiseImageDto imageDto = new CruiseImageDto();
+        imageDto.setId(image.getId());
+        imageDto.setType(image.getType());
+        imageDto.setData(image.getData());
+        imageDto.setCruiseId(image.getCruise().getId());
+        return imageDto;
     }
 
     public CruiseImage uploadFile(MultipartFile file, Integer cruiseId) throws IOException {

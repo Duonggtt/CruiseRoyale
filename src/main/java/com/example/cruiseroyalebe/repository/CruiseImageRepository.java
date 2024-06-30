@@ -12,5 +12,7 @@ public interface CruiseImageRepository extends JpaRepository<CruiseImage, Intege
     List<CruiseImage> findAllByCruiseId(Integer cruiseId);
 
     List<CruiseImage> findByCruise_IdOrderByCreatedAtDesc(Integer id);
+
+    List<CruiseImage> findAllByCruiseIdOrderByCreatedAtDesc(Integer cruiseId);
     void deleteByCruiseId(Integer cruiseId);
 }

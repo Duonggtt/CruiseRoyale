@@ -25,6 +25,11 @@ public class CruiseImageController {
         return ResponseEntity.ok(imageService.getFilesOfCurrentCruise(cruiseId));
     }
 
+    @GetMapping("")
+    public ResponseEntity<?> getAllImageByCruise(@RequestParam Integer cruiseId) {
+        return ResponseEntity.ok(imageService.getAllImageByCruiseId(cruiseId));
+    }
+
     @PostMapping("/upload")
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam Integer cruiseId) throws IOException {
         return ResponseEntity.ok(imageService.uploadFile(file, cruiseId));
