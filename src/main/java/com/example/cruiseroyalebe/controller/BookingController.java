@@ -19,11 +19,8 @@ public class BookingController {
     public final BookingService bookingService;
 
     @GetMapping("/")
-    public ResponseEntity<?> getAllBookings(@RequestParam(required = false, defaultValue = "id") String sortField,
-                                          @RequestParam(required = false, defaultValue = "esc") String sortDirection,
-                                          @RequestParam(required = false, defaultValue = "1") Integer page,
-                                          @RequestParam(required = false, defaultValue = "10") Integer limit) {
-        return ResponseEntity.ok(bookingService.getAllBookings(page, limit , sortField, sortDirection));
+    public ResponseEntity<?> getBookings() {
+        return ResponseEntity.ok(bookingService.getBookings());
     }
 
     @PostMapping("/create")

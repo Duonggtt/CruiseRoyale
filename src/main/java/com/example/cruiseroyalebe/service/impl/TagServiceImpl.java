@@ -1,7 +1,11 @@
 package com.example.cruiseroyalebe.service.impl;
 
+import com.example.cruiseroyalebe.entity.CabinType;
+import com.example.cruiseroyalebe.entity.Cruise;
 import com.example.cruiseroyalebe.entity.Tag;
 import com.example.cruiseroyalebe.exception.NotFoundException;
+import com.example.cruiseroyalebe.repository.CabinTypeRepository;
+import com.example.cruiseroyalebe.repository.CruiseRepository;
 import com.example.cruiseroyalebe.repository.TagRepository;
 import com.example.cruiseroyalebe.service.TagService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +22,8 @@ import java.util.List;
 @Slf4j
 public class TagServiceImpl implements TagService {
     private final TagRepository tagRepository;
+    private final CabinTypeRepository cabinTypeRepository;
+    private final CruiseRepository cruiseRepository;
 
     @Override
     public Page<Tag> getAllTags(Integer page, Integer limit , String sortField, String sortDirection) {
@@ -75,12 +81,33 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public void deleteTag(Integer id) {
-        Tag tag = tagRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Tag not found with id = " + id));
-        tagRepository.delete(tag);
+    public List<Tag> getTagsByName(String name) {
+        return tagRepository.findAllByNameLike(name);
     }
 
+    @Override
+    @Transactional
+    public void deleteTag(Integer tagId) {
+        Tag tag = tagRepository.findById(tagId)
+                .orElseThrow(() -> new NotFoundException("Tag not found"));
+
+        // Remove tag from all Cruises
+        List<Cruise> cruisesWithTag = cruiseRepository.findByTagsContaining(tag);
+        for (Cruise cruise : cruisesWithTag) {
+            cruise.getTags().remove(tag);
+            cruiseRepository.save(cruise);
+        }
+
+        // Remove tag from all CabinTypes
+        List<CabinType> cabinTypesWithTag = cabinTypeRepository.findByTagsContaining(tag);
+        for (CabinType cabinType : cabinTypesWithTag) {
+            cabinType.getTags().remove(tag);
+            cabinTypeRepository.save(cabinType);
+        }
+
+        // Finally, delete the tag
+        tagRepository.delete(tag);
+    }
     @Override
     public List<Tag> getTags() {
         return tagRepository.findAll();

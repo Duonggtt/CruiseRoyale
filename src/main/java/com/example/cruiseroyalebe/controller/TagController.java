@@ -53,4 +53,9 @@ public class TagController {
     public ResponseEntity<?> getTags() {
         return ResponseEntity.ok(tagService.getTags());
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> getTagsByName(@RequestParam String name) {
+        return ResponseEntity.ok(tagService.getTagsByName(name));
+    }
 }

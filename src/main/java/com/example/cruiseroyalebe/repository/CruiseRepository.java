@@ -3,6 +3,7 @@ package com.example.cruiseroyalebe.repository;
 import com.example.cruiseroyalebe.entity.Cabin;
 import com.example.cruiseroyalebe.entity.Cruise;
 import com.example.cruiseroyalebe.entity.Location;
+import com.example.cruiseroyalebe.entity.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -38,5 +39,7 @@ public interface CruiseRepository extends JpaRepository<Cruise, Integer> {
 
     @Query("SELECT DISTINCT c FROM Cruise c JOIN c.tags t WHERE t.id IN :tagIds")
     List<Cruise> findAllByTagIds(List<Integer> tagIds);
+
+    List<Cruise> findByTagsContaining(Tag tag);
 
 }

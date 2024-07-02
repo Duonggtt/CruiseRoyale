@@ -3,6 +3,7 @@ package com.example.cruiseroyalebe.repository;
 import com.example.cruiseroyalebe.entity.Cabin;
 import com.example.cruiseroyalebe.entity.CabinType;
 import com.example.cruiseroyalebe.entity.Location;
+import com.example.cruiseroyalebe.entity.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,4 +23,6 @@ public interface CabinTypeRepository extends JpaRepository<CabinType, Integer> {
     Page<CabinType> findAll(String keyword, Pageable pageable);
 
     CabinType findByName(String name);
+
+    List<CabinType> findByTagsContaining(Tag tag);
 }

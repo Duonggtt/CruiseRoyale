@@ -18,4 +18,5 @@ public interface TagService {
     Tag getTagById(Integer id);
     void deleteTag(Integer id);
     List<Tag> getTags();
+    List<Tag> getTagsByName(String name);
 }

@@ -21,4 +21,7 @@ public interface TagRepository extends JpaRepository<Tag, Integer> {
 
     List<Tag> findAll();
 
+    @Query("Select t from Tag t where t.name like %?1%")
+    List<Tag> findAllByNameLike(String name);
+
 }

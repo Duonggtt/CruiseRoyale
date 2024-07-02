@@ -28,7 +28,7 @@ public class Booking {
     private Date orderDate;
 
     @Column(name = "guest_quantity")
-    private int GuestQuantity;
+    private int guestQuantity;
 
     @Column(name = "total_price")
     private BigDecimal totalPrice;

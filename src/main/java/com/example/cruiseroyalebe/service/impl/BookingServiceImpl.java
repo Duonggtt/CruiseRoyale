@@ -4,6 +4,7 @@ import com.example.cruiseroyalebe.entity.Booking;
 import com.example.cruiseroyalebe.entity.Cabin;
 import com.example.cruiseroyalebe.entity.Cruise;
 import com.example.cruiseroyalebe.entity.User;
+import com.example.cruiseroyalebe.modal.dto.*;
 import com.example.cruiseroyalebe.modal.request.UpsertBookingRequest;
 import com.example.cruiseroyalebe.repository.BookingRepository;
 import com.example.cruiseroyalebe.repository.CabinRepository;
@@ -192,7 +193,61 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Booking> getBookings() {
-        return bookingRepository.findAll();
+    public List<BookingDto> getBookings() {
+        return bookingRepository.findAll().stream()
+                .map(this::convertToDto)
+                .toList();
+    }
+
+    public BookingDto convertToDto(Booking booking) {
+        BookingDto bookingDto = new BookingDto();
+        bookingDto.setId(booking.getId());
+        bookingDto.setBookingDate(booking.getBookingDate());
+        bookingDto.setOrderDate(booking.getOrderDate());
+        bookingDto.setGuestQuantity(booking.getGuestQuantity());
+        bookingDto.setTotalPrice(booking.getTotalPrice());
+        bookingDto.setNote(booking.getNote());
+        bookingDto.setBookingStatus(booking.getBookingStatus());
+        bookingDto.setPaymentStatus(booking.getPaymentStatus());
+
+        // Convert User to UserDto
+        if (booking.getUser() != null) {
+            UserDto userDto = new UserDto();
+            userDto.setId(booking.getUser().getId());
+            userDto.setName(booking.getUser().getName());
+            userDto.setPhone(booking.getUser().getPhone());
+            userDto.setEmail(booking.getUser().getEmail());
+            bookingDto.setUserDto(userDto);
+        }
+
+        // Convert Cruise to CruiseBookingDto
+        if (booking.getCruise() != null) {
+            CruiseBookingDto cruiseDto = new CruiseBookingDto();
+            cruiseDto.setId(booking.getCruise().getId());
+            cruiseDto.setName(booking.getCruise().getName());
+            bookingDto.setCruiseDto(cruiseDto);
+        }
+
+        // Convert Cabins to List<CabinDto> including CabinTypeDto
+        if (booking.getCabin() != null) {
+            List<CabinDto> cabinDtos = booking.getCabin().stream()
+                    .map(cabin -> {
+                        CabinDto cabinDto = new CabinDto();
+                        cabinDto.setId(cabin.getId());
+
+                        if (cabin.getCabinType() != null) {
+                            CabinTypeDto cabinTypeDto = new CabinTypeDto();
+                            cabinTypeDto.setId(cabin.getCabinType().getId());
+                            cabinTypeDto.setName(cabin.getCabinType().getName());
+                            cabinDto.setCabinTypeDto(cabinTypeDto);
+                        }
+
+                        return cabinDto;
+                    })
+                    .toList();
+            bookingDto.setCabinDto(cabinDtos);
+        }
+
+        return bookingDto;
     }
 }
