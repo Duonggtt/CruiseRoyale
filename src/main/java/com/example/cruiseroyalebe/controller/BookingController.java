@@ -38,6 +38,26 @@ public class BookingController {
         return new ResponseEntity<>(bookingService.returnBooking(id), HttpStatus.CREATED);
     }
 
+    @GetMapping("/total-revenue")
+    public ResponseEntity<?> getTotalRevenue() {
+        return ResponseEntity.ok(bookingService.getTotalRevenue());
+    }
+
+    @GetMapping("/count-booking")
+    public ResponseEntity<?> getCountBookings() {
+        return ResponseEntity.ok(bookingService.getCountBooking());
+    }
+
+    @GetMapping("/count-booking-true")
+    public ResponseEntity<?> getCountBookingsByStatusTrue() {
+        return ResponseEntity.ok(bookingService.getCountBookingByStatusTrue());
+    }
+
+    @GetMapping("/count-booking-false")
+    public ResponseEntity<?> getCountBookingsByStatusFalse() {
+        return ResponseEntity.ok(bookingService.getCountBookingByStatusFalse());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getBookingById(@PathVariable Integer id) {
         return ResponseEntity.ok(bookingService.getBookingById(id));

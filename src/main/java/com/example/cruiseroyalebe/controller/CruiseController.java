@@ -77,6 +77,11 @@ public class CruiseController {
         return ResponseEntity.ok(cruiseService.getSomeFeaturedCruise());
     }
 
+    @GetMapping("/top-featured")
+    public ResponseEntity<?> getSomeTopFeaturedCruise() {
+        return ResponseEntity.ok(cruiseService.getSomeFeaturedTopCruise());
+    }
+
     @GetMapping("/filter/locate/{locationId}")
     public ResponseEntity<?> getCruisesByLocationId(@PathVariable Integer locationId) {
         return ResponseEntity.ok(cruiseService.getCruisesByLocationId(locationId));

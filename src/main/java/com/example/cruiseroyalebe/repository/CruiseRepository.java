@@ -4,6 +4,7 @@ import com.example.cruiseroyalebe.entity.Cabin;
 import com.example.cruiseroyalebe.entity.Cruise;
 import com.example.cruiseroyalebe.entity.Location;
 import com.example.cruiseroyalebe.entity.Tag;
+import com.example.cruiseroyalebe.modal.dto.CruiseFeaturedDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -30,7 +31,6 @@ public interface CruiseRepository extends JpaRepository<Cruise, Integer> {
 
     @Query(value = "SELECT c.* FROM cruise c JOIN (SELECT cruise_id, COUNT(*) as booking_count FROM booking GROUP BY cruise_id ORDER BY booking_count DESC LIMIT 6) b ON c.id = b.cruise_id", nativeQuery = true)
     List<Cruise> getSomeFeaturedCruise();
-
 
     List<Cruise> findAllByLocation_Id(Integer locationId);
 

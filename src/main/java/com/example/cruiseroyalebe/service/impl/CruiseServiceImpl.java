@@ -3,6 +3,7 @@ package com.example.cruiseroyalebe.service.impl;
 import com.example.cruiseroyalebe.entity.*;
 import com.example.cruiseroyalebe.exception.NotFoundException;
 import com.example.cruiseroyalebe.modal.dto.CruiseDto;
+import com.example.cruiseroyalebe.modal.dto.CruiseFeaturedDto;
 import com.example.cruiseroyalebe.modal.request.UpsertCruiseRequest;
 import com.example.cruiseroyalebe.repository.*;
 import com.example.cruiseroyalebe.service.CruiseService;
@@ -220,6 +221,22 @@ public class CruiseServiceImpl implements CruiseService {
         return cruises.stream()
                 .map(this::convertToCruiseDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CruiseFeaturedDto> getSomeFeaturedTopCruise() {
+        List<Cruise> cruises = cruiseRepository.getSomeFeaturedCruise();
+        return cruises.stream()
+                .map(this::convertToCruiseFeaturedDto)
+                .collect(Collectors.toList());
+    }
+
+    private CruiseFeaturedDto convertToCruiseFeaturedDto(Cruise cruise) {
+        CruiseFeaturedDto cruiseFeaturedDto = new CruiseFeaturedDto();
+        cruiseFeaturedDto.setId(cruise.getId());
+        cruiseFeaturedDto.setName(cruise.getName());
+        cruiseFeaturedDto.setPrice(cruise.getPrice());
+        return cruiseFeaturedDto;
     }
 
     private CruiseDto convertToCruiseDto(Cruise cruise) {

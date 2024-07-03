@@ -199,6 +199,26 @@ public class BookingServiceImpl implements BookingService {
                 .toList();
     }
 
+    @Override
+    public BigDecimal getTotalRevenue() {
+        return bookingRepository.getTotalRevenue();
+    }
+
+    @Override
+    public int getCountBooking() {
+        return bookingRepository.countBooking();
+    }
+
+    @Override
+    public int getCountBookingByStatusTrue() {
+        return bookingRepository.countBookingByBookingStatusTrue();
+    }
+
+    @Override
+    public int getCountBookingByStatusFalse() {
+        return bookingRepository.countBookingByBookingStatusFalse();
+    }
+
     public BookingDto convertToDto(Booking booking) {
         BookingDto bookingDto = new BookingDto();
         bookingDto.setId(booking.getId());

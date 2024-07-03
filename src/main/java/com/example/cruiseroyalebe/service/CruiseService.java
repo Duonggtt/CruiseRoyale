@@ -3,6 +3,7 @@ package com.example.cruiseroyalebe.service;
 import com.example.cruiseroyalebe.entity.Cruise;
 import com.example.cruiseroyalebe.entity.Location;
 import com.example.cruiseroyalebe.modal.dto.CruiseDto;
+import com.example.cruiseroyalebe.modal.dto.CruiseFeaturedDto;
 import com.example.cruiseroyalebe.modal.request.UpsertCruiseRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,4 +27,5 @@ public interface CruiseService {
     List<Cruise> getCruisesByLocationId(Integer locationId);
     List<Cruise> getCruisesByNameLike(String name);
     List<Cruise> getCruisesByTagIds(List<Integer> tagIds);
+    List<CruiseFeaturedDto> getSomeFeaturedTopCruise();
 }

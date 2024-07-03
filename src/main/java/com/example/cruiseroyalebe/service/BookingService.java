@@ -8,6 +8,7 @@ import com.example.cruiseroyalebe.modal.request.UpsertCabinRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface BookingService {
@@ -20,4 +21,8 @@ public interface BookingService {
     void deleteBooking(Integer id);
     List<BookingDto> getBookings();
     Boolean returnBooking(Integer bookingId);
+    BigDecimal getTotalRevenue();
+    int getCountBooking();
+    int getCountBookingByStatusTrue();
+    int getCountBookingByStatusFalse();
 }

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Repository
@@ -21,4 +22,16 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
     Booking findByCruiseId(Integer cruiseId);
 
     boolean existsByUserId(Integer userId);
+
+    @Query("select sum(b.totalPrice) from Booking b where b.paymentStatus = true")
+    BigDecimal getTotalRevenue();
+
+    @Query("select count(b) from Booking b")
+    int countBooking();
+
+    @Query("select count(b) from Booking b where b.bookingStatus = true")
+    int countBookingByBookingStatusTrue();
+
+    @Query("select count(b) from Booking b where b.bookingStatus = false")
+    int countBookingByBookingStatusFalse();
 }
