@@ -183,6 +183,7 @@ public class BookingServiceImpl implements BookingService {
         return true;
     }
 
+
     @Override
     public Booking getBookingById(Integer id) {
         return bookingRepository.findById(id)
@@ -193,6 +194,12 @@ public class BookingServiceImpl implements BookingService {
     public void deleteBooking(Integer id) {
         Booking booking = bookingRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Booking not found with id " + id));
+
+        for (Cabin cabin : booking.getCabin()) {
+            cabin.setAvailableRooms(cabin.getAvailableRooms() + 1);
+            cabinRepository.save(cabin);
+        }
+
         bookingRepository.delete(booking);
     }
 
