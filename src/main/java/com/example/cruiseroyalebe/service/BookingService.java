@@ -3,6 +3,7 @@ package com.example.cruiseroyalebe.service;
 import com.example.cruiseroyalebe.entity.Booking;
 import com.example.cruiseroyalebe.entity.Cabin;
 import com.example.cruiseroyalebe.modal.dto.BookingDto;
+import com.example.cruiseroyalebe.modal.request.UpdateBookingStatusRequest;
 import com.example.cruiseroyalebe.modal.request.UpsertBookingRequest;
 import com.example.cruiseroyalebe.modal.request.UpsertCabinRequest;
 import org.springframework.data.domain.Page;
@@ -25,4 +26,6 @@ public interface BookingService {
     int getCountBooking();
     int getCountBookingByStatusTrue();
     int getCountBookingByStatusFalse();
+    List<BookingDto> getAllBookingsByUser_NameLike(String name);
+    Booking updateStatus(UpdateBookingStatusRequest request, Integer id);
 }

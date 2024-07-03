@@ -1,5 +1,6 @@
 package com.example.cruiseroyalebe.controller;
 
+import com.example.cruiseroyalebe.modal.request.UpdateBookingStatusRequest;
 import com.example.cruiseroyalebe.modal.request.UpsertBookingRequest;
 import com.example.cruiseroyalebe.modal.request.UpsertCabinRequest;
 import com.example.cruiseroyalebe.service.BookingService;
@@ -58,6 +59,11 @@ public class BookingController {
         return ResponseEntity.ok(bookingService.getCountBookingByStatusFalse());
     }
 
+    @GetMapping("/search-by-user")
+    public ResponseEntity<?> getBookingsByUser_NameLike(@RequestParam String name) {
+        return ResponseEntity.ok(bookingService.getAllBookingsByUser_NameLike(name));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getBookingById(@PathVariable Integer id) {
         return ResponseEntity.ok(bookingService.getBookingById(id));
@@ -66,5 +72,10 @@ public class BookingController {
     @DeleteMapping("/{id}")
     public void deleteBooking(@PathVariable Integer id) {
         bookingService.deleteBooking(id);
+    }
+
+    @PutMapping("/update-status/{id}")
+    public ResponseEntity<?> updateStatus(@Valid @RequestBody UpdateBookingStatusRequest request, @PathVariable Integer id) {
+        return new ResponseEntity<>(bookingService.updateStatus(request, id), HttpStatus.CREATED);
     }
 }

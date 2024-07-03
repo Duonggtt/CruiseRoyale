@@ -5,6 +5,7 @@ import com.example.cruiseroyalebe.entity.Cabin;
 import com.example.cruiseroyalebe.entity.Cruise;
 import com.example.cruiseroyalebe.entity.User;
 import com.example.cruiseroyalebe.modal.dto.*;
+import com.example.cruiseroyalebe.modal.request.UpdateBookingStatusRequest;
 import com.example.cruiseroyalebe.modal.request.UpsertBookingRequest;
 import com.example.cruiseroyalebe.repository.BookingRepository;
 import com.example.cruiseroyalebe.repository.CabinRepository;
@@ -217,6 +218,22 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public int getCountBookingByStatusFalse() {
         return bookingRepository.countBookingByBookingStatusFalse();
+    }
+
+    @Override
+    public List<BookingDto> getAllBookingsByUser_NameLike(String name) {
+        return bookingRepository.findAllByUser_NameLike(name).stream()
+                .map(this::convertToDto)
+                .toList();
+    }
+
+    @Override
+    public Booking updateStatus(UpdateBookingStatusRequest request, Integer id) {
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Booking not found with id " + id));
+        booking.setBookingStatus(request.getBookingStatus());
+        bookingRepository.save(booking);
+        return booking;
     }
 
     public BookingDto convertToDto(Booking booking) {

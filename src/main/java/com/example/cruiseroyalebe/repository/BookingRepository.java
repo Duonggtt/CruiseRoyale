@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -34,4 +35,7 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
 
     @Query("select count(b) from Booking b where b.bookingStatus = false")
     int countBookingByBookingStatusFalse();
+
+    @Query("select b from Booking b where b.user.name like %?1%")
+    List<Booking> findAllByUser_NameLike(String name);
 }
