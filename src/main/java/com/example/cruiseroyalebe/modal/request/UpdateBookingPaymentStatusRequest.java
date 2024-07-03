@@ -7,6 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UpdateBookingStatusRequest {
-    private Boolean bookingStatus;
+public class UpdateBookingPaymentStatusRequest {
+    private Boolean paymentStatus;
 }

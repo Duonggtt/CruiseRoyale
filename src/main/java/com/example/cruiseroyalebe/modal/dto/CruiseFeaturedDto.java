@@ -13,4 +13,6 @@ public class CruiseFeaturedDto {
     private Integer id;
     private String name;
     private BigDecimal price;
+    private int totalRoomQuantity;
+    private int totalAvailableRoomQuantity;
 }

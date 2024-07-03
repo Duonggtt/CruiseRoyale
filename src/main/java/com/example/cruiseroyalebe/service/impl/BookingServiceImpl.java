@@ -5,7 +5,7 @@ import com.example.cruiseroyalebe.entity.Cabin;
 import com.example.cruiseroyalebe.entity.Cruise;
 import com.example.cruiseroyalebe.entity.User;
 import com.example.cruiseroyalebe.modal.dto.*;
-import com.example.cruiseroyalebe.modal.request.UpdateBookingStatusRequest;
+import com.example.cruiseroyalebe.modal.request.UpdateBookingPaymentStatusRequest;
 import com.example.cruiseroyalebe.modal.request.UpsertBookingRequest;
 import com.example.cruiseroyalebe.repository.BookingRepository;
 import com.example.cruiseroyalebe.repository.CabinRepository;
@@ -169,6 +169,9 @@ public class BookingServiceImpl implements BookingService {
     public Boolean returnBooking(Integer bookingId) {
         Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new RuntimeException("Booking not found"));
+        if(!booking.getPaymentStatus()) {
+            throw new RuntimeException("Booking has not been paid yet");
+        }
 
         for (Cabin cabin : booking.getCabin()) {
             cabin.setAvailableRooms(cabin.getAvailableRooms() + 1);
@@ -228,10 +231,10 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Booking updateStatus(UpdateBookingStatusRequest request, Integer id) {
+    public Booking updateStatus(UpdateBookingPaymentStatusRequest request, Integer id) {
         Booking booking = bookingRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Booking not found with id " + id));
-        booking.setBookingStatus(request.getBookingStatus());
+        booking.setPaymentStatus(request.getPaymentStatus());
         bookingRepository.save(booking);
         return booking;
     }

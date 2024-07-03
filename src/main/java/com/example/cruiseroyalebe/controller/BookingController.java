@@ -1,6 +1,6 @@
 package com.example.cruiseroyalebe.controller;
 
-import com.example.cruiseroyalebe.modal.request.UpdateBookingStatusRequest;
+import com.example.cruiseroyalebe.modal.request.UpdateBookingPaymentStatusRequest;
 import com.example.cruiseroyalebe.modal.request.UpsertBookingRequest;
 import com.example.cruiseroyalebe.modal.request.UpsertCabinRequest;
 import com.example.cruiseroyalebe.service.BookingService;
@@ -74,8 +74,8 @@ public class BookingController {
         bookingService.deleteBooking(id);
     }
 
-    @PutMapping("/update-status/{id}")
-    public ResponseEntity<?> updateStatus(@Valid @RequestBody UpdateBookingStatusRequest request, @PathVariable Integer id) {
+    @PutMapping("/update-payment-status/{id}")
+    public ResponseEntity<?> updateStatus(@Valid @RequestBody UpdateBookingPaymentStatusRequest request, @PathVariable Integer id) {
         return new ResponseEntity<>(bookingService.updateStatus(request, id), HttpStatus.CREATED);
     }
 }

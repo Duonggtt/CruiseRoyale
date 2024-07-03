@@ -236,6 +236,15 @@ public class CruiseServiceImpl implements CruiseService {
         cruiseFeaturedDto.setId(cruise.getId());
         cruiseFeaturedDto.setName(cruise.getName());
         cruiseFeaturedDto.setPrice(cruise.getPrice());
+        List<Cabin> cabins = cabinRepository.findByCruiseId(cruise.getId());
+        int totalAvailableRooms = cabins.stream()
+                .mapToInt(Cabin::getAvailableRooms)
+                .sum();
+        int totalRooms = cabins.stream()
+                .mapToInt(Cabin::getRoomQuantity)
+                .sum();
+        cruiseFeaturedDto.setTotalRoomQuantity(totalRooms);
+        cruiseFeaturedDto.setTotalAvailableRoomQuantity(totalAvailableRooms);
         return cruiseFeaturedDto;
     }
 
