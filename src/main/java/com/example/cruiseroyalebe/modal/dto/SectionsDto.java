@@ -14,5 +14,5 @@ import java.util.List;
 public class SectionsDto {
     private String text;
     private Integer cruiseId;
-    private Collection<CruiseDtSectionImage> cruiseDtSectionImages;
+    private CruiseDtSectionImage cruiseDtSectionImage;
 }

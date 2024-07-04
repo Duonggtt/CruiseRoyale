@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -18,4 +19,6 @@ public interface OwnerRepository extends JpaRepository<Owner, Integer> {
             + "concat(o.id, o.name)"
             + "LIKE %?1%")
     Page<Owner> findAll(String keyword, Pageable pageable);
+    @Query("SELECT o FROM Owner o WHERE o.name LIKE %?1%")
+    List<Owner> findOwnersByNameLike(String name);
 }

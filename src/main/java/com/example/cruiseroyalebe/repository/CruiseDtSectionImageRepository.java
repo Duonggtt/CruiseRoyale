@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface CruiseDtSectionImageRepository extends JpaRepository<CruiseDtSectionImage, Integer> {
-    void deleteByIdIn(List<Integer> ids);
+    void deleteById(Integer id);
 }

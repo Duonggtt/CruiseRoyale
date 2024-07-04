@@ -42,7 +42,8 @@ public class CruiseDetailSectionServiceImpl implements CruiseDetailSectionServic
     @Override
     public CruiseDetailSection saveCruiseDetailSection(UpsertCruiseDetailSection request) {
 
-        List<CruiseDtSectionImage> cruiseDtSectionImages = cruiseDtSectionImageRepository.findAllById(request.getCruiseDtSectionImageIds());
+        CruiseDtSectionImage cruiseDtSectionImage = cruiseDtSectionImageRepository.findById(request.getCruiseDtSectionImageId())
+                .orElseThrow(() -> new RuntimeException("CruiseDtSectionImage not found"));
 
         Cruise cruise = cruiseRepository.findById(request.getCruiseId())
                 .orElseThrow(() -> new RuntimeException("Cruise not found"));
@@ -50,13 +51,14 @@ public class CruiseDetailSectionServiceImpl implements CruiseDetailSectionServic
         CruiseDetailSection cruiseDetailSection = new CruiseDetailSection();
         cruiseDetailSection.setText(request.getText());
         cruiseDetailSection.setCruise(cruise);
-        cruiseDetailSection.setCruiseDtSectionImages(cruiseDtSectionImages);
+        cruiseDetailSection.setCruiseDtSectionImage(cruiseDtSectionImage);
         return cruiseDetailSectionRepository.save(cruiseDetailSection);
     }
 
     @Override
     public CruiseDetailSection updateCruiseDetailSection(Integer id, UpsertCruiseDetailSection request) {
-        List<CruiseDtSectionImage> cruiseDtSectionImages = cruiseDtSectionImageRepository.findAllById(request.getCruiseDtSectionImageIds());
+        CruiseDtSectionImage cruiseDtSectionImage = cruiseDtSectionImageRepository.findById(request.getCruiseDtSectionImageId())
+                .orElseThrow(() -> new RuntimeException("CruiseDtSectionImage not found"));
 
         Cruise cruise = cruiseRepository.findById(request.getCruiseId())
                 .orElseThrow(() -> new RuntimeException("Cruise not found"));
@@ -66,7 +68,7 @@ public class CruiseDetailSectionServiceImpl implements CruiseDetailSectionServic
 
         cruiseDetailSection.setText(request.getText());
         cruiseDetailSection.setCruise(cruise);
-        cruiseDetailSection.setCruiseDtSectionImages(cruiseDtSectionImages);
+        cruiseDetailSection.setCruiseDtSectionImage(cruiseDtSectionImage);
         return cruiseDetailSectionRepository.save(cruiseDetailSection);
     }
 
@@ -85,7 +87,7 @@ public class CruiseDetailSectionServiceImpl implements CruiseDetailSectionServic
         return new SectionsDto(
                 section.getText(),
                 section.getCruise().getId(),
-                section.getCruiseDtSectionImages()
+                section.getCruiseDtSectionImage()
         );
     }
 

@@ -15,6 +15,6 @@ public class UpsertCruiseDetailSection {
 
     private String text;
     private Integer cruiseId;
-    private List<Integer> cruiseDtSectionImageIds;
+    private Integer cruiseDtSectionImageId;
 
 }

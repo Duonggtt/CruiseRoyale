@@ -27,8 +27,8 @@ public class CruiseDetailSection {
     @JoinColumn(name = "cruise_id")
     private Cruise cruise;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "cruise_detail_section_id")
-    private List<CruiseDtSectionImage> cruiseDtSectionImages;
+    private CruiseDtSectionImage cruiseDtSectionImage;
 
 }

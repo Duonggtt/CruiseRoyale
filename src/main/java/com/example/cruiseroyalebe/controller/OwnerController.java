@@ -41,6 +41,16 @@ public class OwnerController {
         return ResponseEntity.ok(ownerService.getOwnerById(id));
     }
 
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<?> getOwnerDtoById(@PathVariable Integer id) {
+        return ResponseEntity.ok(ownerService.getOwnerDetailById(id));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> getOwnerById(@RequestParam String name) {
+        return ResponseEntity.ok(ownerService.findOwnersByNameLike(name));
+    }
+
     @GetMapping("/auth")
     public ResponseEntity<?> getOwners() {
         return ResponseEntity.ok(ownerService.getOwners());

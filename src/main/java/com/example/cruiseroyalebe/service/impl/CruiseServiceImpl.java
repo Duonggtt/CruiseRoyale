@@ -165,10 +165,8 @@ public class CruiseServiceImpl implements CruiseService {
         // Xóa cruise detail sections và images
         List<CruiseDetailSection> cruiseDetailSections = cruiseDetailSectionRepository.findByCruiseId(id);
         for (CruiseDetailSection section : cruiseDetailSections) {
-            List<Integer> imageIds = section.getCruiseDtSectionImages().stream()
-                    .map(CruiseDtSectionImage::getId)
-                    .collect(Collectors.toList());
-            cruiseDtSectionImageRepository.deleteByIdIn(imageIds);
+            Integer imageId = section.getCruiseDtSectionImage().getId();
+            cruiseDtSectionImageRepository.deleteById(imageId);
         }
         cruiseDetailSectionRepository.deleteByCruiseId(id);
 

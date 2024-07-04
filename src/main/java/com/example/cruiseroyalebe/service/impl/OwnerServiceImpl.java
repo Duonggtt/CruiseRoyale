@@ -1,8 +1,11 @@
 package com.example.cruiseroyalebe.service.impl;
 
+import com.example.cruiseroyalebe.entity.Cruise;
 import com.example.cruiseroyalebe.entity.Owner;
 import com.example.cruiseroyalebe.entity.Rule;
 import com.example.cruiseroyalebe.exception.NotFoundException;
+import com.example.cruiseroyalebe.modal.dto.OwnerDto;
+import com.example.cruiseroyalebe.repository.CruiseRepository;
 import com.example.cruiseroyalebe.repository.OwnerRepository;
 import com.example.cruiseroyalebe.repository.RuleRepository;
 import com.example.cruiseroyalebe.service.OwnerService;
@@ -20,6 +23,7 @@ import java.util.List;
 @Slf4j
 public class OwnerServiceImpl implements OwnerService {
     private final OwnerRepository ownerRepository;
+    private final CruiseRepository cruiseRepository;
 
     @Override
     public Page<Owner> getAllOwners(Integer page, Integer limit , String sortField, String sortDirection) {
@@ -74,9 +78,35 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
+    public OwnerDto getOwnerDetailById(Integer id) {
+        Owner owner = ownerRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Owner not found with id = " + id));
+        return convertToOwnerDto(owner);
+    }
+
+    public OwnerDto convertToOwnerDto(Owner owner) {
+        OwnerDto ownerDto = new OwnerDto();
+        ownerDto.setId(owner.getId());
+        ownerDto.setName(owner.getName());
+        List<Cruise> cruises = cruiseRepository.findAll();
+        List<String> cruiseNames = cruises.stream()
+                .filter(cruise -> cruise.getOwner().getId().equals(owner.getId()))
+                .map(Cruise::getName)
+                .toList();
+        ownerDto.setCruiseNames(cruiseNames);
+        return ownerDto;
+    }
+
+    @Override
     public void deleteOwner(Integer id) {
         Owner owner = ownerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Owner not found with id = " + id));
+        List<Cruise> cruises = cruiseRepository.findAll();
+        for (Cruise cruise : cruises) {
+            if(cruise.getOwner().getId().equals(id)) {
+                throw new NotFoundException("Owner can not be deleted because it is used in cruise");
+            }
+        }
         ownerRepository.delete(owner);
     }
 
@@ -84,5 +114,11 @@ public class OwnerServiceImpl implements OwnerService {
     public List<Owner> getOwners() {
         return ownerRepository.findAll();
     }
+
+    @Override
+    public List<Owner> findOwnersByNameLike(String name) {
+        return ownerRepository.findOwnersByNameLike(name);
+    }
+
 
 }
