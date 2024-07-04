@@ -191,6 +191,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public BookingDto getBookingDtoById(Integer id) {
+        return convertToDto(getBookingById(id));
+    }
+
+    @Override
     public void deleteBooking(Integer id) {
         Booking booking = bookingRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Booking not found with id " + id));

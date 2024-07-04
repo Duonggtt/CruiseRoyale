@@ -19,6 +19,7 @@ public interface BookingService {
     Booking createBooking(UpsertBookingRequest request);
     Booking updateBooking(Integer id, UpsertBookingRequest request);
     Booking getBookingById(Integer id);
+    BookingDto getBookingDtoById(Integer id);
     void deleteBooking(Integer id);
     List<BookingDto> getBookings();
     Boolean returnBooking(Integer bookingId);
