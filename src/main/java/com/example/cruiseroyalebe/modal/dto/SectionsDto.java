@@ -12,7 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class SectionsDto {
+    private Integer id;
     private String text;
-    private Integer cruiseId;
-    private CruiseDtSectionImage cruiseDtSectionImage;
+    private CruiseSectionDto cruiseDto;
+    private Integer cruiseDtSectionImageId;
 }

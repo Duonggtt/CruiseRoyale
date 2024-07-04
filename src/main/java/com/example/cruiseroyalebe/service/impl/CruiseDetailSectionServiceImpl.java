@@ -4,7 +4,10 @@ import com.example.cruiseroyalebe.entity.Cruise;
 import com.example.cruiseroyalebe.entity.CruiseDetailSection;
 import com.example.cruiseroyalebe.entity.CruiseDtSectionImage;
 import com.example.cruiseroyalebe.exception.NotFoundException;
+import com.example.cruiseroyalebe.modal.dto.CruiseBookingDto;
+import com.example.cruiseroyalebe.modal.dto.CruiseSectionDto;
 import com.example.cruiseroyalebe.modal.dto.SectionsDto;
+import com.example.cruiseroyalebe.modal.dto.UserDto;
 import com.example.cruiseroyalebe.modal.request.UpsertCruiseDetailSection;
 import com.example.cruiseroyalebe.repository.CruiseDetailSectionRepository;
 import com.example.cruiseroyalebe.repository.CruiseDtSectionImageRepository;
@@ -29,14 +32,18 @@ public class CruiseDetailSectionServiceImpl implements CruiseDetailSectionServic
     private final CruiseRepository cruiseRepository;
 
 
-    public List<CruiseDetailSection> getAllCruiseDetailSections() {
-        return cruiseDetailSectionRepository.findAll();
+    public List<SectionsDto> getAllCruiseDetailSections() {
+        return cruiseDetailSectionRepository.findAll()
+                .stream()
+                .map(this::convertToSectionsDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public CruiseDetailSection getCruiseDetailSectionById(Integer id) {
+    public SectionsDto getCruiseDetailSectionById(Integer id) {
         return cruiseDetailSectionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("CruiseDetailSection not found"));
+                .map(this::convertToSectionsDto)
+                .orElseThrow(() -> new NotFoundException("CruiseDetailSection not found"));
     }
 
     @Override
@@ -84,11 +91,17 @@ public class CruiseDetailSectionServiceImpl implements CruiseDetailSectionServic
     }
 
     private SectionsDto convertToSectionsDto(CruiseDetailSection section) {
-        return new SectionsDto(
-                section.getText(),
-                section.getCruise().getId(),
-                section.getCruiseDtSectionImage()
-        );
+        SectionsDto sectionsDto = new SectionsDto();
+        sectionsDto.setId(section.getId());
+        sectionsDto.setText(section.getText());
+        if (section.getCruise() != null) {
+            CruiseSectionDto cruiseDto = new CruiseSectionDto();
+            cruiseDto.setId(section.getCruise().getId());
+            cruiseDto.setName(section.getCruise().getName());
+            sectionsDto.setCruiseDto(cruiseDto);
+        }
+        sectionsDto.setCruiseDtSectionImageId(section.getCruiseDtSectionImage().getId());
+        return sectionsDto;
     }
 
     @Override
