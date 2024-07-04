@@ -23,4 +23,5 @@ public interface RuleRepository extends JpaRepository<Rule, Integer> {
             + "LIKE %?1%")
     Page<Rule> findAll(String keyword, Pageable pageable);
 
+
 }

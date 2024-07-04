@@ -1,9 +1,6 @@
 package com.example.cruiseroyalebe.repository;
 
-import com.example.cruiseroyalebe.entity.Cabin;
-import com.example.cruiseroyalebe.entity.Cruise;
-import com.example.cruiseroyalebe.entity.Location;
-import com.example.cruiseroyalebe.entity.Tag;
+import com.example.cruiseroyalebe.entity.*;
 import com.example.cruiseroyalebe.modal.dto.CruiseFeaturedDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,5 +38,7 @@ public interface CruiseRepository extends JpaRepository<Cruise, Integer> {
     List<Cruise> findAllByTagIds(List<Integer> tagIds);
 
     List<Cruise> findByTagsContaining(Tag tag);
+
+    List<Cruise> findByRulesContaining(Rule rule);
 
 }

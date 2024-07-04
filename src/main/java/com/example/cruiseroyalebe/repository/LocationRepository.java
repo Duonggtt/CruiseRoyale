@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -18,4 +19,7 @@ public interface LocationRepository extends JpaRepository<Location, Integer> {
             + "concat(l.id, l.routeName, l.address, l.city)"
             + "LIKE %?1%")
     Page<Location> findAll(String keyword, Pageable pageable);
+
+    @Query("SELECT l FROM Location l WHERE l.city LIKE %?1%")
+    List<Location> findAllByCityLike(String city);
 }

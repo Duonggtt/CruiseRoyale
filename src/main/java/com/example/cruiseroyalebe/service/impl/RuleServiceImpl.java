@@ -1,8 +1,10 @@
 package com.example.cruiseroyalebe.service.impl;
 
+import com.example.cruiseroyalebe.entity.Cruise;
 import com.example.cruiseroyalebe.entity.Rule;
 import com.example.cruiseroyalebe.entity.Tag;
 import com.example.cruiseroyalebe.exception.NotFoundException;
+import com.example.cruiseroyalebe.repository.CruiseRepository;
 import com.example.cruiseroyalebe.repository.RuleRepository;
 import com.example.cruiseroyalebe.repository.TagRepository;
 import com.example.cruiseroyalebe.service.RuleService;
@@ -20,6 +22,7 @@ import java.util.List;
 @Slf4j
 public class RuleServiceImpl implements RuleService {
     private final RuleRepository ruleRepository;
+    private final CruiseRepository cruiseRepository;
 
     @Override
     public Page<Rule> getAllRules(Integer page, Integer limit , String sortField, String sortDirection) {
@@ -77,6 +80,12 @@ public class RuleServiceImpl implements RuleService {
     public void deleteRule(Integer id) {
         Rule rule = ruleRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Rule not found with id = " + id));
+        // Remove rule from all Cruises
+        List<Cruise> cruisesWithRule = cruiseRepository.findByRulesContaining(rule);
+        for (Cruise cruise : cruisesWithRule) {
+            cruise.getRules().remove(rule);
+            cruiseRepository.save(cruise);
+        }
         ruleRepository.delete(rule);
     }
 

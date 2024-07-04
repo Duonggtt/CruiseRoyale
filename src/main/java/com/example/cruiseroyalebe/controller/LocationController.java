@@ -36,6 +36,11 @@ public class LocationController {
         return new ResponseEntity<>(locationService.updateLocation(id,request), HttpStatus.CREATED);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<?> getLocationByCityLike(@RequestParam String city) {
+        return ResponseEntity.ok(locationService.getLocationByCityLike(city));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getLocationById(@PathVariable Integer id) {
         return ResponseEntity.ok(locationService.getLocationById(id));

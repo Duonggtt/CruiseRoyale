@@ -1,8 +1,10 @@
 package com.example.cruiseroyalebe.service.impl;
 
+import com.example.cruiseroyalebe.entity.Cruise;
 import com.example.cruiseroyalebe.entity.Location;
 import com.example.cruiseroyalebe.entity.Owner;
 import com.example.cruiseroyalebe.exception.NotFoundException;
+import com.example.cruiseroyalebe.repository.CruiseRepository;
 import com.example.cruiseroyalebe.repository.LocationRepository;
 import com.example.cruiseroyalebe.repository.OwnerRepository;
 import com.example.cruiseroyalebe.service.LocationService;
@@ -20,6 +22,7 @@ import java.util.List;
 @Slf4j
 public class LocationServiceImpl implements LocationService {
     private final LocationRepository locationRepository;
+    private final CruiseRepository cruiseRepository;
 
     @Override
     public Page<Location> getAllLocations(Integer page, Integer limit , String sortField, String sortDirection) {
@@ -81,7 +84,18 @@ public class LocationServiceImpl implements LocationService {
     public void deleteLocation(Integer id) {
         Location location = locationRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Location not found with id = " + id));
+        List<Cruise> cruises = cruiseRepository.findAll();
+        for (Cruise cruise : cruises) {
+            if (cruise.getLocation().getId().equals(id)) {
+                throw new NotFoundException("Location is used in a cruise");
+            }
+        }
         locationRepository.delete(location);
+    }
+
+    @Override
+    public List<Location> getLocationByCityLike(String city) {
+        return locationRepository.findAllByCityLike(city);
     }
 
     @Override

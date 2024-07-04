@@ -16,4 +16,5 @@ public interface LocationService {
     Location getLocationById(Integer id);
     void deleteLocation(Integer id);
     List<Location> getLocations();
+    List<Location> getLocationByCityLike(String city);
 }
