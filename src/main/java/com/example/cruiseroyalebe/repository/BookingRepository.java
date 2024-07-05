@@ -38,4 +38,7 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
 
     @Query("select b from Booking b where b.user.name like %?1%")
     List<Booking> findAllByUser_NameLike(String name);
+
+    @Query("select b from Booking b where b.user.id = ?1")
+    List<Booking> findAllByUser_Id(Integer userId);
 }

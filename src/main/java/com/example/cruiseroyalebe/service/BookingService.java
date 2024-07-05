@@ -29,4 +29,5 @@ public interface BookingService {
     int getCountBookingByStatusFalse();
     List<BookingDto> getAllBookingsByUser_NameLike(String name);
     Booking updateStatus(UpdateBookingPaymentStatusRequest request, Integer id);
+    List<BookingDto> getBookingDtoByUserId(Integer UserId);
 }

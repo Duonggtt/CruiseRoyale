@@ -83,4 +83,9 @@ public class BookingController {
     public ResponseEntity<?> updateStatus(@Valid @RequestBody UpdateBookingPaymentStatusRequest request, @PathVariable Integer id) {
         return new ResponseEntity<>(bookingService.updateStatus(request, id), HttpStatus.CREATED);
     }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getBookingByUserId(@PathVariable Integer userId) {
+        return ResponseEntity.ok(bookingService.getBookingDtoByUserId(userId));
+    }
 }
