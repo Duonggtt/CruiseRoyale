@@ -88,4 +88,9 @@ public class BookingController {
     public ResponseEntity<?> getBookingByUserId(@PathVariable Integer userId) {
         return ResponseEntity.ok(bookingService.getBookingDtoByUserId(userId));
     }
+
+    @GetMapping("/total-price/{bookingId}")
+    public ResponseEntity<?> getTotalPriceByBookingId(@PathVariable Integer bookingId) {
+        return ResponseEntity.ok(bookingService.getTotalPriceByBookingId(bookingId));
+    }
 }

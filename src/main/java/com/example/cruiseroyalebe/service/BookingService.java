@@ -30,4 +30,5 @@ public interface BookingService {
     List<BookingDto> getAllBookingsByUser_NameLike(String name);
     Booking updateStatus(UpdateBookingPaymentStatusRequest request, Integer id);
     List<BookingDto> getBookingDtoByUserId(Integer UserId);
+    BigDecimal getTotalPriceByBookingId(Integer bookingId);
 }

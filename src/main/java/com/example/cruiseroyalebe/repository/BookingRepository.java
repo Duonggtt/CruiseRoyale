@@ -41,4 +41,7 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
 
     @Query("select b from Booking b where b.user.id = ?1")
     List<Booking> findAllByUser_Id(Integer userId);
+
+    @Query("select b.totalPrice from Booking b where b.id = ?1")
+    BigDecimal getTotalPriceByBookingId(Integer bookingId);
 }

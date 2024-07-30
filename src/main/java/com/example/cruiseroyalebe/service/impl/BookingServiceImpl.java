@@ -166,6 +166,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public BigDecimal getTotalPriceByBookingId(Integer bookingId) {
+        return bookingRepository.getTotalPriceByBookingId(bookingId);
+    }
+
+    @Override
     public Boolean returnBooking(Integer bookingId) {
         Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new RuntimeException("Booking not found"));
